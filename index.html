@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Project Dashboard — Daily</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3352;
+    --text: #e8eaf6;
+    --muted: #8b90b8;
+    --green: #22c55e;
+    --green-bg: #052e16;
+    --yellow: #eab308;
+    --yellow-bg: #1c1701;
+    --red: #ef4444;
+    --red-bg: #2d0a0a;
+    --accent: #818cf8;
+    --accent2: #a78bfa;
+    --font-head: 'Georgia', serif;
+    --font-body: 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'Consolas', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-left h1 {
+    font-family: var(--font-head);
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+  .header-left p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+  }
+  .run-stamp {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  .run-stamp strong { color: var(--text); }
+
+  /* ── Layout ── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* ── RAG pill ── */
+  .rag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+  .rag.green  { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green);  }
+  .rag.yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow); }
+  .rag.red    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red);    }
+  .rag::before { content: '●'; font-size: 0.6rem; }
+
+  /* ── Project card ── */
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px 28px 18px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .card-header h2 {
+    font-family: var(--font-head);
+    font-size: 1.15rem;
+    font-weight: normal;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .rag-reason {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr; }
+  }
+
+  .card-section {
+    padding: 22px 28px;
+    border-right: 1px solid var(--border);
+  }
+  .card-section:last-child { border-right: none; }
+  .card-section.full-width {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .exec-summary {
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* ── Risks ── */
+  .risk-list, .win-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .risk-list li, .win-list li {
+    font-size: 0.87rem;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .risk-list li {
+    background: var(--red-bg);
+    border: 1px solid #4a1111;
+    color: #fca5a5;
+  }
+  .win-list li {
+    background: var(--green-bg);
+    border: 1px solid #14532d;
+    color: #86efac;
+  }
+  .risk-list li .icon, .win-list li .icon { flex-shrink: 0; font-size: 1rem; }
+
+  /* ── Milestone ── */
+  .milestone-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .milestone-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent2);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* ── Sources ── */
+  .source-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .source-link {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .source-link:hover {
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ── Section divider ── */
+  .projects-heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Critical Risk Banner ── */
+  .critical-banner {
+    background: var(--red-bg);
+    border: 1px solid #7f1d1d;
+    border-left: 4px solid var(--red);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .critical-banner .banner-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .critical-banner .banner-text h3 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .critical-banner .banner-text p {
+    font-size: 0.84rem;
+    color: #fca5a5;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>My Project Dashboard — Daily</h1>
+    <p>PerfectServe · Executive Status · Auto-generated</p>
+  </div>
+  <div class="run-stamp">
+    <strong>Last Run</strong><br>
+    July 1, 2026 · 10:00 AM MT<br>
+    Data from Fathom · Analysis by Claude AI
+  </div>
+</header>
+
+<main>
+
+  <!-- ⚠️ Critical Risk Banner -->
+  <div class="critical-banner">
+    <div class="banner-icon">🚨</div>
+    <div class="banner-text">
+      <h3>Hard Deadline Alert — August 31, 2026</h3>
+      <p>All Atlanta data center migrations (Genesys/Twilio porting, SFTP, OIDC/LDAP, VPN) must be complete by August 31. With 61 days remaining, capacity bottlenecks and customer scheduling lag are active risks across all workstreams. 50% milestone target set for July 30.</p>
+    </div>
+  </div>
+
+  <p class="projects-heading">// Active Projects — Week of July 1, 2026</p>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECT 1: GENESYS DEPRECATION
+  ════════════════════════════════════════════════════════════ -->
+  <div class="project-card">
+    <div class="card-header">
+      <div>
+        <h2>Genesys Deprecation → Twilio Migration</h2>
+        <p class="rag-reason">Final number porting batches imminent (Jul 2 &amp; Jul 6); SFTP and 5-9s tracks remain at risk of missing July 30 milestone.</p>
+      </div>
+      <span class="rag yellow">Yellow</span>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Exec Summary -->
+      <div class="card-section full-width" style="border-top:none; border-bottom: 1px solid var(--border);">
+        <div class="section-label">// Executive Summary</div>
+        <p class="exec-summary">
+          The Genesys-to-Twilio migration is in its final porting phase, with ~28k toll-free numbers scheduled to port July 2 and the last local batch on July 6. All number submissions are complete; residual risk centers on 11–12 Five9s-managed numbers that may not be removable from the Batch 7 list. A new 50% migration milestone (July 30) was established across OIDC, SFTP, and VPN workstreams to prevent a last-minute capacity crunch before the August 31 hard stop. SFTP migration remains blocked on final documentation and customer list delivery to CS, while the 5-9s SIP trunk setup requires our team to provide configuration details before any migration can begin. Overall progress is positive, but three parallel tracks must accelerate to avoid August congestion.
+        </p>
+      </div>
+
+      <!-- Risks -->
+      <div class="card-section">
+        <div class="section-label">// Top Risks</div>
+        <ul class="risk-list">
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>Batch 7 Five9s Numbers:</strong> 11–12 numbers managed by Five9s may not be removable from the July 2 AT&amp;T port batch. Andre investigating; if unresolved, these numbers could cause routing errors post-port.</span>
+          </li>
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>SFTP Blocked — CS Can't Schedule:</strong> Customer Success cannot begin migration scheduling until finalized documentation and a complete customer list are delivered. Delay here directly threatens the July 30 milestone.</span>
+          </li>
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>5-9s SIP Configuration Pending:</strong> Five9s confirmed readiness, but setup cannot proceed until PerfectServe provides SIP trunk configuration details. &lt;24 numbers carry ~200k calls/month — high impact if delayed.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Wins -->
+      <div class="card-section">
+        <div class="section-label">// Wins This Period</div>
+        <ul class="win-list">
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>All Number Submissions Complete:</strong> ~52k toll-free and all local numbers submitted. July 2 and July 6 port dates locked in.</span>
+          </li>
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>5-9s Migration Unblocked:</strong> After extended stall, Five9s confirmed capability to set up SIP trunks. Migration can proceed once config details are provided.</span>
+          </li>
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>July 30 Milestone Established:</strong> Team proactively set 50% migration target to de-risk August 31 deadline and prevent capacity bottleneck across OIDC, SFTP, and VPN.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Next Milestone -->
+      <div class="card-section">
+        <div class="section-label">// Next Critical Milestone</div>
+        <div class="milestone-box">
+          <div class="milestone-date">July 2, 2026</div>
+          <strong>Toll-Free Batch 7 Port (~28k numbers)</strong><br>
+          Doug to confirm final number list with Andre; Five9s numbers must be resolved or held. Esteban on-call; Tom Donnelly backup for SIP issues.
+        </div>
+      </div>
+
+      <!-- Sources -->
+      <div class="card-section">
+        <div class="section-label">// Source Meetings</div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/725797616" class="source-link" target="_blank">📋 Jun 29 – Genesys/Platform Check-In</a>
+          <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26 – Weekly Genesys Progress</a>
+          <a href="https://fathom.video/calls/709200192" class="source-link" target="_blank">📋 Jun 15 – Genesys/Platform Check-In</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECT 2: LDAP → OIDC
+  ════════════════════════════════════════════════════════════ -->
+  <div class="project-card">
+    <div class="card-header">
+      <div>
+        <h2>LDAP → OIDC Customer Migration</h2>
+        <p class="rag-reason">Customer engagement improving after webinar; however, migration completion rate remains low against August 31 deadline with critical architectural caveats introduced.</p>
+      </div>
+      <span class="rag yellow">Yellow</span>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Exec Summary -->
+      <div class="card-section full-width" style="border-top:none; border-bottom: 1px solid var(--border);">
+        <div class="section-label">// Executive Summary</div>
+        <p class="exec-summary">
+          OIDC migration momentum improved following a customer webinar clarifying the August 31 deadline, prompting follow-up CSA outreach and Carilion scheduling a July 9 cutover. Phase 2 endpoint development (delete HSO/Account association) was approved in the June 30 backlog refinement, though a legacy design flaw — associations stored by domain name rather than authenticator ID — introduces risk of unintended data deletion and requires clear UI guardrails. A spike was also created to define "hard roadblocks" for user deactivation, indicating customer-reported edge cases are surfacing. CSAs are actively working to convert scheduling requests; a 50% migration milestone by July 30 has been set as the critical leading indicator.
+        </p>
+      </div>
+
+      <!-- Risks -->
+      <div class="card-section">
+        <div class="section-label">// Top Risks</div>
+        <ul class="risk-list">
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>Low Migration Rate vs. Deadline:</strong> OIDC previously missed its June 9 target due to customer scheduling delays. With August 31 as a hard stop, insufficient CSA bandwidth to drive engagement is the top risk.</span>
+          </li>
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>Legacy Domain-Based Association Flaw:</strong> New delete endpoint operates on domain name (not authenticator ID), meaning removal affects all authenticators sharing a domain. Accidental broad data deletion is possible without proper UI warnings.</span>
+          </li>
+          <li>
+            <span class="icon">⚠️</span>
+            <span><strong>Carilion Cutover Requires Fortify Engineer:</strong> CSP Portal bulk upload is not yet live, so each cutover needs a dedicated Fortify engineer — a capacity constraint that could bottleneck bulk migrations.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Wins -->
+      <div class="card-section">
+        <div class="section-label">// Wins This Period</div>
+        <ul class="win-list">
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>Carilion July 9 Cutover Scheduled:</strong> After initially requesting a January delay, Carilion's CSA submitted a ticket for July 9 — a significant positive shift.</span>
+          </li>
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>Delete Endpoint Approved:</strong> Phase 2 endpoint to remove HSO/Account-to-authenticator associations approved; reduces manual support load once live.</span>
+          </li>
+          <li>
+            <span class="icon">✅</span>
+            <span><strong>Data Cleanup Underway:</strong> Jeremy investigating anomalous OIDC accounts (low user counts) to identify deactivation candidates, reducing migration scope.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Next Milestone -->
+      <div class="card-section">
+        <div class="section-label">// Next Critical Milestone</div>
+        <div class="milestone-box">
+          <div class="milestone-date">July 9, 2026</div>
+          <strong>Carilion OIDC Cutover</strong><br>
+          Kevin to confirm date with Carilion and route through CAB process. Requires Fortify engineer availability. First major customer cutover as proof point for August timeline.
+        </div>
+      </div>
+
+      <!-- Sources -->
+      <div class="card-section">
+        <div class="section-label">// Source Meetings</div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/727821907" class="source-link" target="_blank">📋 Jun 30 – PS Axis Backlog Refinement</a>
+          <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26 – Weekly Genesys Progress (OIDC section)</a>
+          <a href="https://fathom.video/calls/707759447" class="source-link" target="_blank">📋 Jun 12 – Weekly Genesys Progress Update</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings</span>
+    <span>Dashboard: My Project Dashboard — Daily · CherieMonte/PS-Projects · main</span>
+  </footer>
+
+</main>
+</body>
+</html>
