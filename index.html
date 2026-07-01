@@ -39,66 +39,65 @@
   /* ── Status bar ── */
   .status-bar { background:#fff; border-bottom:1px solid #e2e4ea; display:flex; overflow-x:auto; }
   .status-item {
-    flex:1; min-width:180px; padding:12px 20px;
+    flex:1; min-width:160px; padding:11px 18px;
     border-right:1px solid #e2e4ea;
-    display:flex; align-items:center; gap:9px;
+    display:flex; align-items:center; gap:8px;
   }
   .status-item:last-child { border-right:none; }
   .status-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
   .dot-green  { background:#16a34a; }
   .dot-yellow { background:#d97706; }
   .dot-red    { background:#dc2626; }
-  .status-item-name  { font-size:0.78rem; font-weight:600; color:#374151; }
-  .status-item-label { font-size:0.68rem; font-weight:500; color:#9ca3af; }
+  .status-item-name  { font-size:0.76rem; font-weight:600; color:#374151; }
+  .status-item-label { font-size:0.67rem; font-weight:500; color:#9ca3af; }
 
   /* ── Main ── */
-  main { max-width:1300px; margin:0 auto; padding:24px 24px 60px; }
-
-  /* ── Banners ── */
-  .banner {
-    border-radius:8px; padding:11px 16px; margin-bottom:14px;
-    display:flex; align-items:flex-start; gap:10px;
-    font-size:0.82rem; line-height:1.5;
-    border:1px solid; border-left-width:4px;
-  }
-  .banner-orange { background:#fff7ed; border-color:#fed7aa; border-left-color:#ea580c; color:#9a3412; }
-  .banner-red    { background:#fef2f2; border-color:#fecaca; border-left-color:#dc2626; color:#991b1b; }
-  .banner strong { font-weight:700; }
+  main { max-width:1400px; margin:0 auto; padding:24px 24px 60px; }
 
   /* ── Section heading ── */
   .section-heading {
     font-size:0.67rem; text-transform:uppercase; letter-spacing:0.1em;
     font-weight:700; color:#9ca3af;
-    margin:22px 0 12px; padding-bottom:6px;
+    margin:20px 0 14px; padding-bottom:6px;
     border-bottom:1px solid #e5e7eb;
     display:flex; align-items:center; gap:8px;
   }
-  .section-heading .section-tag {
+  .section-tag {
     padding:2px 8px; border-radius:4px;
     font-size:0.65rem; font-weight:700; letter-spacing:0.08em;
   }
   .tag-cherie { background:#ede9fe; color:#6d28d9; }
   .tag-aws    { background:#dbeafe; color:#1d4ed8; }
 
+  /* ── 2-column grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media(max-width:900px){ .card-grid{ grid-template-columns:1fr; } }
+
   /* ── Project card ── */
   .project-card {
     background:#fff; border:1px solid #e2e4ea;
-    border-radius:10px; margin-bottom:16px; overflow:hidden;
+    border-radius:10px; overflow:hidden;
     box-shadow:0 1px 3px rgba(0,0,0,0.05);
+    display:flex; flex-direction:column;
   }
-  .card-header { padding:17px 24px 13px; }
+
+  .card-header { padding:16px 20px 12px; }
   .card-header-top {
     display:flex; align-items:flex-start;
-    justify-content:space-between; gap:12px; margin-bottom:10px;
+    justify-content:space-between; gap:10px; margin-bottom:9px;
   }
-  .card-title    { font-size:0.98rem; font-weight:700; color:#111827; }
-  .card-subtitle { font-size:0.74rem; color:#9ca3af; margin-top:2px; }
+  .card-title    { font-size:0.95rem; font-weight:700; color:#111827; }
+  .card-subtitle { font-size:0.72rem; color:#9ca3af; margin-top:2px; }
 
   /* RAG pill */
   .rag-pill {
     display:inline-flex; align-items:center; gap:5px;
-    padding:4px 12px; border-radius:999px;
-    font-size:0.7rem; font-weight:700; letter-spacing:0.05em;
+    padding:3px 11px; border-radius:999px;
+    font-size:0.69rem; font-weight:700; letter-spacing:0.05em;
     text-transform:uppercase; white-space:nowrap;
     border:1.5px solid; flex-shrink:0;
   }
@@ -109,39 +108,43 @@
 
   /* Pull-quote */
   .exec-quote {
-    border-left:3px solid #e5e7eb; padding:7px 13px; margin-bottom:8px;
-    font-style:italic; color:#4b5563; font-size:0.83rem; line-height:1.6;
+    border-left:3px solid #e5e7eb; padding:6px 12px; margin-bottom:7px;
+    font-style:italic; color:#4b5563; font-size:0.81rem; line-height:1.6;
   }
-  .exec-detail { font-size:0.83rem; color:#374151; line-height:1.65; }
+  .exec-detail { font-size:0.81rem; color:#374151; line-height:1.65; }
 
-  /* ── Two-column body ── */
-  .card-body { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #f1f3f7; }
-  @media(max-width:700px){ .card-body{ grid-template-columns:1fr; } }
-  .card-col { padding:15px 24px; border-right:1px solid #f1f3f7; }
+  /* ── Two-column body inside card ── */
+  .card-body {
+    display:grid; grid-template-columns:1fr 1fr;
+    border-top:1px solid #f1f3f7;
+    flex:1;
+  }
+  .card-col { padding:13px 20px; border-right:1px solid #f1f3f7; }
   .card-col:last-child { border-right:none; }
   .col-label {
-    font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em;
-    font-weight:700; color:#9ca3af; margin-bottom:10px;
+    font-size:0.65rem; text-transform:uppercase; letter-spacing:0.1em;
+    font-weight:700; color:#9ca3af; margin-bottom:9px;
   }
-  .item-list { display:flex; flex-direction:column; gap:9px; }
-  .item { display:flex; gap:8px; align-items:flex-start; font-size:0.82rem; line-height:1.5; color:#374151; }
-  .item-icon { flex-shrink:0; font-size:0.88rem; margin-top:1px; }
+  .item-list { display:flex; flex-direction:column; gap:8px; }
+  .item { display:flex; gap:7px; align-items:flex-start; font-size:0.8rem; line-height:1.5; color:#374151; }
+  .item-icon { flex-shrink:0; font-size:0.85rem; margin-top:1px; }
   .item strong { color:#111827; }
 
   /* ── Card footer ── */
   .card-footer {
-    border-top:1px solid #f1f3f7; padding:10px 24px;
+    border-top:1px solid #f1f3f7; padding:9px 20px;
     display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:10px; background:#fafafa;
+    flex-wrap:wrap; gap:8px; background:#fafafa;
+    margin-top:auto;
   }
-  .milestone-wrap { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px; }
-  .milestone-date  { font-size:0.74rem; color:#6d28d9; font-weight:700; }
-  .milestone-badge { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:#6b7280; margin-right:2px; }
-  .milestone-text  { font-size:0.81rem; color:#111827; font-weight:600; }
-  .source-links { display:flex; flex-wrap:wrap; gap:5px; }
+  .milestone-wrap { display:flex; align-items:baseline; flex-wrap:wrap; gap:3px; }
+  .milestone-date  { font-size:0.72rem; color:#6d28d9; font-weight:700; }
+  .milestone-badge { font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:700; color:#6b7280; margin-right:2px; }
+  .milestone-text  { font-size:0.79rem; color:#111827; font-weight:600; }
+  .source-links { display:flex; flex-wrap:wrap; gap:4px; }
   .source-link {
-    font-size:0.7rem; color:#6d28d9; text-decoration:none;
-    padding:2px 8px; border:1px solid #ddd6fe;
+    font-size:0.68rem; color:#6d28d9; text-decoration:none;
+    padding:2px 7px; border:1px solid #ddd6fe;
     border-radius:4px; background:#faf5ff; white-space:nowrap;
   }
   .source-link:hover { background:#ede9fe; }
@@ -174,343 +177,319 @@
 <div class="status-bar">
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
-    <div>
-      <div class="status-item-name">Genesys → Twilio</div>
-      <div class="status-item-label">AT RISK</div>
-    </div>
+    <div><div class="status-item-name">Genesys → Twilio</div><div class="status-item-label">AT RISK</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
-    <div>
-      <div class="status-item-name">LDAP → OIDC</div>
-      <div class="status-item-label">AT RISK</div>
-    </div>
+    <div><div class="status-item-name">LDAP → OIDC</div><div class="status-item-label">AT RISK</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
-    <div>
-      <div class="status-item-name">Atlanta AWS Migration</div>
-      <div class="status-item-label">AT RISK</div>
-    </div>
+    <div><div class="status-item-name">Atlanta AWS Migration</div><div class="status-item-label">AT RISK</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
-    <div>
-      <div class="status-item-name">Canada AWS Platform</div>
-      <div class="status-item-label">AT RISK</div>
-    </div>
+    <div><div class="status-item-name">Canada AWS Platform</div><div class="status-item-label">AT RISK</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
-    <div>
-      <div class="status-item-name">OC West Expansion</div>
-      <div class="status-item-label">AT RISK</div>
-    </div>
+    <div><div class="status-item-name">OC West Expansion</div><div class="status-item-label">AT RISK</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-red"></span>
-    <div>
-      <div class="status-item-name">IDP / Lightning Bolt</div>
-      <div class="status-item-label">OFF TRACK</div>
-    </div>
+    <div><div class="status-item-name">IDP / Lightning Bolt</div><div class="status-item-label">OFF TRACK</div></div>
   </div>
 </div>
 
 <!-- ── Main ── -->
 <main>
 
-  <div class="banner banner-orange">
-    ⚠️&nbsp;<span><strong>Hard Deadline: August 31, 2026</strong> — All Atlanta data center migrations (Twilio porting, SFTP, OIDC/LDAP, VPN) must be complete. 61 days remaining. 50% milestone target set for July 30 across all workstreams.</span>
-  </div>
-  <div class="banner banner-red">
-    🚨&nbsp;<span><strong>Capacity Risk (Q3 PI Planning):</strong> Platform running at 2x historical velocity with 3/5 confidence. IT team (3–4 people) at 2/5 confidence. QA lead Betsy is single point of failure across AWS, TLS, and IDP tracks simultaneously. Multiple customer deliverables already deferred to Q4.</span>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       SECTION 1 — CHERIE'S PROJECTS
-  ════════════════════════════════════════════ -->
+  <!-- SECTION 1 -->
   <div class="section-heading">
     // Genesys &amp; OIDC Migration Workstreams
     <span class="section-tag tag-cherie">Cherie Monte · PM</span>
   </div>
 
-  <!-- CARD: Genesys -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">📞 Genesys Deprecation → Twilio Migration</div>
-          <div class="card-subtitle">Atlanta Data Center → Twilio/AWS · PS Team + Contractors (started Jul 1)</div>
-        </div>
-        <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
-      </div>
-      <div class="exec-quote">Final number porting batches imminent (Jul 2 &amp; Jul 6); SFTP and Five9s tracks remain at risk of missing the July 30 milestone. Platform is the #1 Q3 priority per PI Planning with migration waves planned for early and late August.</div>
-      <div class="exec-detail">The Genesys-to-Twilio migration is in its final porting phase — ~28k toll-free numbers port July 2 and the last local batch ports July 6. All submissions are complete but 11–12 Five9s-managed numbers may not be removable from Batch 7, creating a residual routing risk. SFTP remains blocked on documentation and customer list delivery to CS, while Five9s SIP trunk setup awaits configuration details from PerfectServe. Contractors started July 1 to support the PS team through the August push.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Batch 7 Five9s Numbers:</strong> 11–12 Five9s-managed numbers may not be removable from July 2 AT&amp;T port batch. Andre investigating — unresolved numbers risk routing failures post-port.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>SFTP Blocked:</strong> CS cannot schedule migrations until finalized docs and complete customer list are delivered — directly threatens July 30 milestone.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Five9s SIP Config Pending:</strong> Five9s confirmed readiness but can't proceed until PS provides SIP trunk config. &lt;24 numbers carry ~200k calls/month.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Platform Capacity at Limit:</strong> Running at 2x historical velocity with 3/5 confidence vote. Scope creep from Canada or OC West could further destabilize timeline.</span></div>
-        </div>
-      </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>All Number Submissions Complete:</strong> ~52k toll-free and all local numbers submitted. July 2 and July 6 port dates locked with on-call coverage assigned.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Five9s Migration Unblocked:</strong> Five9s confirmed SIP trunk capability. Migration proceeds once PS provides configuration details.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>July 30 Milestone Established:</strong> 50% migration target set for OIDC, SFTP, and VPN to de-risk August 31 deadline.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Contractors On Board:</strong> Contract team started July 1 supporting PS team. CC epic stories being refined for contractor readiness.</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">July 2, 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">Toll-Free Batch 7 Port (~28k numbers) · Local Batch 8 on July 6</span>
-      </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/725797616" class="source-link" target="_blank">📋 Jun 29 – Genesys/Platform</a>
-        <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26 – Weekly Progress</a>
-        <a href="https://fathom.video/calls/722873489" class="source-link" target="_blank">📋 Jun 25 – PI Planning</a>
-      </div>
-    </div>
-  </div>
+  <div class="card-grid">
 
-  <!-- CARD: OIDC -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">🔐 LDAP → OIDC Customer Migration</div>
-          <div class="card-subtitle">Legacy LDAP Authenticators → OIDC/CSP Portal · Hard deadline Aug 31</div>
+    <!-- CARD: Genesys -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">📞 Genesys Deprecation → Twilio</div>
+            <div class="card-subtitle">Atlanta Data Center → Twilio/AWS · PS Team + Contractors (Jul 1)</div>
+          </div>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+        <div class="exec-quote">Final porting batches imminent (Jul 2 &amp; Jul 6); SFTP and Five9s tracks at risk of missing the July 30 milestone. Platform is #1 Q3 priority with migration waves planned for August.</div>
+        <div class="exec-detail">All ~52k toll-free and local number submissions complete. Residual risk centers on 11–12 Five9s-managed numbers that may not be removable from Batch 7. SFTP blocked on documentation and customer list delivery to CS. Five9s SIP trunk setup awaits PS configuration details. Contractors started July 1 to support the August push.</div>
       </div>
-      <div class="exec-quote">Customer engagement improving post-webinar but migration completion rate remains critically low against August 31. New delete endpoint introduces domain-association data risk requiring UI guardrails before release.</div>
-      <div class="exec-detail">Following a customer webinar clarifying the August 31 hard stop, CSAs are driving follow-up outreach and Carilion shifted from a January delay to a July 9 cutover — a significant positive signal. Phase 2 delete endpoint approved in Jun 30 backlog but a legacy domain-based association flaw means removals affect all authenticators sharing a domain. Each cutover currently requires a dedicated Fortify engineer due to CSP Portal bulk upload not yet being live, creating a scaling bottleneck.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Low Migration Rate vs. Deadline:</strong> OIDC previously missed its June 9 target. August 31 is a hard communicated stop — insufficient CSA bandwidth to drive engagement is top risk.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Domain-Based Delete Flaw:</strong> New endpoint operates on domain name (not authenticator ID) — removal affects ALL authenticators sharing a domain. Accidental broad data deletion possible without proper UI warnings.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Fortify Engineer Bottleneck:</strong> Each cutover requires a dedicated Fortify engineer until CSP Portal bulk upload goes live — hard capacity constraint for July–August migration volume.</span></div>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Batch 7 Five9s Numbers:</strong> 11–12 numbers may not be removable from July 2 AT&amp;T port batch — routing failure risk post-port.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>SFTP Blocked:</strong> CS can't schedule migrations until docs and customer list delivered — threatens July 30 milestone.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Five9s SIP Pending:</strong> &lt;24 numbers carry ~200k calls/month; setup blocked until PS provides trunk config details.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>All Submissions Complete:</strong> Port dates July 2 &amp; July 6 locked; Esteban on-call, Tom Donnelly SIP backup.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Five9s Unblocked:</strong> Five9s confirmed SIP trunk capability — migration proceeds once config details provided.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>July 30 Milestone Set:</strong> 50% migration target established for OIDC, SFTP, and VPN to de-risk August 31.</span></div>
+          </div>
         </div>
       </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>Carilion July 9 Cutover Scheduled:</strong> After requesting January delay, Carilion submitted ticket for July 9. Kevin to confirm via CAB.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Delete Endpoint Approved:</strong> Phase 2 endpoint to remove HSO/Account associations approved Jun 30. Reduces manual support tickets once live with proper guardrails.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Data Cleanup Underway:</strong> Jeremy investigating anomalous OIDC accounts to identify deactivation candidates and reduce overall migration scope.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Customer Webinar Complete:</strong> Deadline clarified to customers; CSAs conducting targeted follow-up outreach to accelerate scheduling commitments.</span></div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">July 2, 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">Toll-Free Batch 7 Port (~28k) · Local Batch 8 Jul 6</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/725797616" class="source-link" target="_blank">📋 Jun 29</a>
+          <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26</a>
+          <a href="https://fathom.video/calls/722873489" class="source-link" target="_blank">📋 Jun 25</a>
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">July 9, 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">Carilion OIDC Cutover — Kevin to confirm via CAB · Fortify engineer required</span>
-      </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/727821907" class="source-link" target="_blank">📋 Jun 30 – PS Axis Backlog</a>
-        <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26 – Weekly Progress</a>
-        <a href="https://fathom.video/calls/722873489" class="source-link" target="_blank">📋 Jun 25 – PI Planning</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════
-       SECTION 2 — AWS / PLATFORM PROJECTS
-  ════════════════════════════════════════════ -->
+    <!-- CARD: OIDC -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">🔐 LDAP → OIDC Customer Migration</div>
+            <div class="card-subtitle">Legacy LDAP Authenticators → OIDC/CSP Portal · Hard deadline Aug 31</div>
+          </div>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+        </div>
+        <div class="exec-quote">Customer engagement improving post-webinar but migration rate remains critically low. New delete endpoint introduces domain-association data risk requiring UI guardrails before release.</div>
+        <div class="exec-detail">Carilion shifted from a January delay to a July 9 cutover after webinar clarified the August 31 hard stop. Phase 2 delete endpoint approved Jun 30 but a legacy domain-based flaw means removals affect all authenticators sharing a domain. Each cutover requires a dedicated Fortify engineer until CSP Portal bulk upload goes live.</div>
+      </div>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Low Migration Rate:</strong> OIDC previously missed June 9 target. August 31 is hard-communicated — CSA bandwidth is top risk.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Domain Delete Flaw:</strong> Endpoint operates on domain name (not ID) — affects ALL authenticators sharing a domain. Data deletion risk without UI guardrails.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Fortify Bottleneck:</strong> Each cutover needs a dedicated Fortify engineer until bulk upload goes live — hard capacity constraint July–August.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>Carilion Jul 9 Scheduled:</strong> After requesting January delay, Carilion submitted July 9 ticket. Kevin to confirm via CAB.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Delete Endpoint Approved:</strong> Phase 2 approved Jun 30; reduces manual support tickets once live with proper guardrails.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Data Cleanup Underway:</strong> Jeremy vetting anomalous OIDC accounts to identify deactivation candidates and reduce scope.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">July 9, 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">Carilion OIDC Cutover — CAB approval + Fortify engineer</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/727821907" class="source-link" target="_blank">📋 Jun 30</a>
+          <a href="https://fathom.video/calls/724289274" class="source-link" target="_blank">📋 Jun 26</a>
+          <a href="https://fathom.video/calls/722873489" class="source-link" target="_blank">📋 Jun 25</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /card-grid -->
+
+  <!-- SECTION 2 -->
   <div class="section-heading">
     // AWS Platform &amp; Infrastructure Programs
     <span class="section-tag tag-aws">Jonny Bir · PM</span>
   </div>
 
-  <!-- CARD: Atlanta AWS -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">🏗️ Atlanta AWS Migration</div>
-          <div class="card-subtitle">Atlanta Data Center → AWS · 5-Wave Production Plan (Aug–Dec)</div>
-        </div>
-        <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
-      </div>
-      <div class="exec-quote">Staging is now unblocked and progressing; key risks are Redis validation required before shutdown, expired ACM cert needing remediation, and a formal load-test plan still needed before the August production cutover.</div>
-      <div class="exec-detail">Staging is unblocked as of June 30 — SQL configuration is underway and file server share migration begins Thursday. The production cutover plan (5 waves, monthly maintenance windows, August–December) is official and has been presented to 50+ customers. The key outstanding risk is Redis/SignalR — infrastructure is in place but unvalidated, and validation must complete before Atlanta can shut down.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Load Test Plan Missing:</strong> Cold-cache performance issue found in QA load testing; formal load-test plan needed and prior owner is unavailable for two weeks.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Redis/SignalR Unvalidated:</strong> Infrastructure complete but testing pending a Care API dependency. Must be confirmed stable before Atlanta shutdown.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>DB38 Gated on V4 Completion:</strong> Final production database gated on V4 code completion against a firm 5-wave migration plan with little schedule slack.</span></div>
-        </div>
-      </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>QA Testing Unblocked:</strong> James &amp; Betsy resolved the Atlantic QA service conflict. Staging unblocked as of June 30.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Production Plan Finalized:</strong> 5-wave migration plan presented to 50+ customers. V4 PRs merging to unblock production work.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>ACM Cert Remediation In Progress:</strong> Expired cert identified and remediation underway as part of staging environment cleanup.</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">Early August 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">Build/test complete to enable Wave 1 of production migration</span>
-      </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/728843358" class="source-link" target="_blank">📋 Jun 29 – Stand-up</a>
-        <a href="https://fathom.video/calls/722649290" class="source-link" target="_blank">📋 Jun 25 – Stand-up</a>
-        <a href="https://fathom.video/calls/721001575" class="source-link" target="_blank">📋 Jun 24 – Stand-up</a>
-      </div>
-    </div>
-  </div>
+  <div class="card-grid">
 
-  <!-- CARD: Canada AWS -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">🇨🇦 Canada AWS Platform</div>
-          <div class="card-subtitle">Canada AWS Platform Build · EKS + RDS + MQ + Twilio/A2P</div>
+    <!-- CARD: Atlanta AWS -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">🏗️ Atlanta AWS Migration</div>
+            <div class="card-subtitle">Atlanta Data Center → AWS · 5-Wave Plan (Aug–Dec)</div>
+          </div>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+        <div class="exec-quote">Staging unblocked and progressing; key risks are Redis validation required before shutdown, expired ACM cert needing remediation, and a formal load-test plan still needed before the August cutover.</div>
+        <div class="exec-detail">Staging unblocked as of June 30 — SQL config underway, file server share migration begins Thursday. Production cutover plan (5 waves, monthly maintenance windows, August–December) is official and presented to 50+ customers. Key outstanding risk: Redis/SignalR infrastructure is in place but unvalidated — must be confirmed stable before Atlanta shuts down.</div>
       </div>
-      <div class="exec-quote">EKS build has no clear owner or timeline for its core blocker, and a holiday week plus a stalled account-access request are compounding the delay.</div>
-      <div class="exec-detail">RDS, Amazon MQ, and the Canada Twilio/A2P messaging strategy are all moving forward, but the EKS build remains stuck on a non-functional PerfectServe module with no internal Kubernetes expert available to verify the new cluster. A holiday week reduced client-side availability further, and new team members still lack AWS account access.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>EKS Build Blocked:</strong> Non-functional "potted identities" module; no internal Kubernetes expert remains to verify the new cluster after prior specialists left.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>AWS Account Access Stalled:</strong> New team members (Brandon, Russell) stalled in PerfectServe IAM process; key client contacts out this week.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Twilio 10DLC/A2P Approval:</strong> Campaign approval expected to take ~3 weeks; any rejection resets the clock to zero.</span></div>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Load Test Plan Missing:</strong> Cold-cache issue found in QA; formal load-test plan needed and prior owner unavailable for two weeks.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Redis/SignalR Unvalidated:</strong> Infrastructure complete but testing pending Care API dependency — must be stable before Atlanta shutdown.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>DB38 Gated on V4:</strong> Final prod database gated on V4 code completion against firm 5-wave plan with little schedule slack.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>QA Unblocked:</strong> James &amp; Betsy resolved Atlantic QA service conflict. Staging unblocked June 30.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Production Plan Finalized:</strong> 5-wave plan presented to 50+ customers; V4 PRs merging to unblock prod work.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>ACM Cert Remediation:</strong> Expired cert identified and remediation underway in staging cleanup.</span></div>
+          </div>
         </div>
       </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>Amazon MQ Deployed:</strong> 3 brokers deployed; IRSA ownership consolidated under a single ticket to remove duplicated work.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Canada Twilio Strategy Finalized:</strong> Reusing existing Telmedic Production-CA account instead of building from scratch — reduces setup time and risk.</span></div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">Early August 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">Build/test complete → Wave 1 production migration</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/728843358" class="source-link" target="_blank">📋 Jun 29</a>
+          <a href="https://fathom.video/calls/722649290" class="source-link" target="_blank">📋 Jun 25</a>
+          <a href="https://fathom.video/calls/721001575" class="source-link" target="_blank">📋 Jun 24</a>
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">Mid-July 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">EKS cluster verification + Canadian 10DLC campaign approval</span>
-      </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/725639518" class="source-link" target="_blank">📋 Jun 29 – Collab Stand-up</a>
-        <a href="https://fathom.video/calls/722649314" class="source-link" target="_blank">📋 Jun 25 – Twilio 10DLC</a>
-        <a href="https://fathom.video/calls/722649304" class="source-link" target="_blank">📋 Jun 25 – Collab Stand-up</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- CARD: OC West -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">🌐 OC West Expansion (POC Phase)</div>
-          <div class="card-subtitle">Operator Console West Region · Aurora Global Cluster + DMS Load</div>
+    <!-- CARD: Canada AWS -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">🇨🇦 Canada AWS Platform</div>
+            <div class="card-subtitle">Canada AWS Platform Build · EKS + RDS + MQ + Twilio/A2P</div>
+          </div>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+        <div class="exec-quote">EKS build has no clear owner or timeline for its core blocker; a holiday week and stalled account-access requests are compounding the delay.</div>
+        <div class="exec-detail">RDS, Amazon MQ, and Canada Twilio/A2P strategy are moving forward, but EKS build is stuck on a non-functional PerfectServe module with no internal Kubernetes expert available to verify the cluster. New team members still lack AWS account access; holiday week reduced client-side availability further.</div>
       </div>
-      <div class="exec-quote">A single outstanding application code dependency and a tight budget ceiling threaten the July 3rd target, though the deadline has flexibility and the core POC goal remains on track.</div>
-      <div class="exec-detail">The POC has moved from approval gridlock into active infrastructure buildout: the Aurora Global Cluster is live and the DMS full load is ready to run as soon as a pending connection-string code change lands. The July 3rd target will likely slip by several days given the expected 1–2 day load duration, but the team has room to absorb this since the date is not hard-gated. Core goal — empirical latency testing for West region users — remains on track.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>July 3rd Target at Risk:</strong> DMS full load could take 1–2 days alone, pushing final assessment into following week given the holiday.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Code Change Blocking DMS:</strong> Application code change (owner: Miguel) needed for connection string, plus a second refactor for Aurora Global write-forwarding.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Budget Cap Hit:</strong> Project running at full 30-hour weekly budget cap — no flexibility to absorb further delays without scope decision.</span></div>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>EKS Build Blocked:</strong> Non-functional "potted identities" module; no internal Kubernetes expert after prior specialists left.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>AWS Access Stalled:</strong> New members (Brandon, Russell) stalled in PS IAM process; key contacts out this week.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Twilio 10DLC Timing:</strong> A2P campaign approval ~3 weeks; any rejection resets the clock to zero.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>Amazon MQ Deployed:</strong> 3 brokers live; IRSA ownership consolidated under single ticket to remove duplicated work.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Canada Twilio Strategy Set:</strong> Reusing existing Telmedic Production-CA account instead of building from scratch.</span></div>
+          </div>
         </div>
       </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>POC Strategy Approved:</strong> Team proceeding with current Terraform setup; full V4-standard rebuild planned for production phase.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>Aurora Global Cluster Live:</strong> Cluster provisioned and running; DMS full-load Terraform dry run ready pending the code fix from Miguel.</span></div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">Mid-July 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">EKS cluster verification + 10DLC campaign approval</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/725639518" class="source-link" target="_blank">📋 Jun 29</a>
+          <a href="https://fathom.video/calls/722649314" class="source-link" target="_blank">📋 Jun 25</a>
+          <a href="https://fathom.video/calls/722649304" class="source-link" target="_blank">📋 Jun 25</a>
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">Early–Mid July 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">DMS full load &amp; latency assessment to inform contract vs. ROI decision</span>
-      </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/725639508" class="source-link" target="_blank">📋 Jun 29 – Stand-up</a>
-        <a href="https://fathom.video/calls/725236168" class="source-link" target="_blank">📋 Jun 25 – POC Strategy</a>
-        <a href="https://fathom.video/calls/717238962" class="source-link" target="_blank">📋 Jun 22 – Stand-up</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- CARD: IDP -->
-  <div class="project-card">
-    <div class="card-header">
-      <div class="card-header-top">
-        <div>
-          <div class="card-title">🛑 IDP / Lightning Bolt</div>
-          <div class="card-subtitle">PerfectServe IDP · Weekly Release Cadence Approved · August Target</div>
+    <!-- CARD: OC West -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">🌐 OC West Expansion (POC)</div>
+            <div class="card-subtitle">Operator Console West Region · Aurora Global Cluster + DMS</div>
+          </div>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <span class="rag-pill rag-red"><span class="dot"></span> Off Track</span>
+        <div class="exec-quote">Single outstanding code dependency and tight budget ceiling threaten July 3rd target, though deadline has flexibility and the POC's core goal remains on track.</div>
+        <div class="exec-detail">Aurora Global Cluster is live and DMS full load is ready pending a connection-string code change from Miguel. July 3rd target will likely slip by several days given expected 1–2 day load duration, but date is not hard-gated. Core goal — empirical latency testing for West users — remains achievable. Project is at its 30-hour weekly budget cap.</div>
       </div>
-      <div class="exec-quote">An unresolved Lightning Bolt rollback, roadmap deferral risk, and QA single point of failure are stacking up against the release timeline and require continued executive attention.</div>
-      <div class="exec-detail">IDP cleared a key process hurdle by winning approval for weekly (rather than maintenance-window) releases, but the project is carrying real risk after the June 17 Lightning Bolt release failed and rolled back. The RCA is complete and corrective items are queued for the next release window, yet the project's place on the Q3 roadmap is now in question. QA capacity is concentrated in one person (Betsy) stretched across three concurrent release tracks. Escalation to senior leadership is underway.</div>
-    </div>
-    <div class="card-body">
-      <div class="card-col">
-        <div class="col-label">Key Risks &amp; Blockers</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>Q3 Roadmap At Risk:</strong> June 17 Lightning Bolt release failed and rolled back. Project risks being dropped from Q3 planning over perceived team workload — escalated to CIO/SLT.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>QA Single Point of Failure:</strong> Betsy is simultaneously testing AWS, TLS, and IDP work — a critical bottleneck across all three release tracks with no backup capacity.</span></div>
-          <div class="item"><span class="item-icon">⚠️</span><span><strong>July 8 TLS Dependency:</strong> Weekly-release approval and August IDP target both hinge on July 8 TLS 1.1 upgrade landing cleanly, with LB correction items still to be implemented.</span></div>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>July 3rd Target at Risk:</strong> DMS full load alone takes 1–2 days; final assessment likely slips into following week due to holiday.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Code Change Blocking DMS:</strong> Connection string fix (Miguel) + second refactor needed for Aurora Global write-forwarding.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Budget Cap Hit:</strong> At full 30-hour weekly cap — no flexibility to absorb further delay without scope decision.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>POC Strategy Approved:</strong> Proceeding with current Terraform setup; full V4-standard rebuild planned for production phase.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Aurora Cluster Live:</strong> Global cluster provisioned; DMS full-load Terraform dry run ready pending Miguel's code fix.</span></div>
+          </div>
         </div>
       </div>
-      <div class="card-col">
-        <div class="col-label">Recent Progress</div>
-        <div class="item-list">
-          <div class="item"><span class="item-icon">✅</span><span><strong>Weekly Release Cadence Approved:</strong> IDP approved for weekly releases with near-zero downtime — unblocks faster delivery going forward.</span></div>
-          <div class="item"><span class="item-icon">✅</span><span><strong>LB RCA Complete:</strong> Lightning Bolt rollback RCA completed and shared with CIO/SLT. Correction items identified for next release window.</span></div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">Early–Mid July 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">DMS full load + latency assessment → contract vs. ROI decision</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/725639508" class="source-link" target="_blank">📋 Jun 29</a>
+          <a href="https://fathom.video/calls/725236168" class="source-link" target="_blank">📋 Jun 25</a>
+          <a href="https://fathom.video/calls/717238962" class="source-link" target="_blank">📋 Jun 22</a>
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <div class="milestone-wrap">
-        <span class="milestone-date">July 8, 2026</span>
-        <span class="milestone-badge">· Next Milestone:</span>
-        <span class="milestone-text">TLS 1.1 Upgrade (release prerequisite) + Q3 roadmap decision; IDP release targeting August</span>
+
+    <!-- CARD: IDP -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div>
+            <div class="card-title">🛑 IDP / Lightning Bolt</div>
+            <div class="card-subtitle">PerfectServe IDP · Weekly Release Cadence Approved · August Target</div>
+          </div>
+          <span class="rag-pill rag-red"><span class="dot"></span> Off Track</span>
+        </div>
+        <div class="exec-quote">Lightning Bolt rollback, Q3 roadmap deferral risk, and a QA single point of failure are stacking up against the release timeline — executive attention required.</div>
+        <div class="exec-detail">IDP approved for weekly releases with near-zero downtime, but the June 17 Lightning Bolt release failed and rolled back. RCA is complete and shared with CIO/SLT; corrective items queued for next window. Project's Q3 roadmap placement is now in question. QA (Betsy) is a single point of failure across AWS, TLS, and IDP tracks simultaneously. Escalation to senior leadership already underway.</div>
       </div>
-      <div class="source-links">
-        <a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Jun 26 – Scrum of Scrums</a>
-        <a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 Jun 24 – LB RCA Sync</a>
-        <a href="https://fathom.video/calls/722649300" class="source-link" target="_blank">📋 Jun 25 – AWS Support Review</a>
+      <div class="card-body">
+        <div class="card-col">
+          <div class="col-label">Key Risks &amp; Blockers</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Q3 Roadmap at Risk:</strong> Jun 17 LB release rolled back; project risks being dropped from Q3 planning over team workload — escalated to CIO/SLT.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>QA Single Point of Failure:</strong> Betsy testing AWS, TLS, and IDP simultaneously — critical bottleneck across all three tracks with no backup.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>July 8 TLS Dependency:</strong> Weekly release approval and August IDP target hinge on July 8 TLS 1.1 upgrade landing cleanly; LB correction items still pending.</span></div>
+          </div>
+        </div>
+        <div class="card-col">
+          <div class="col-label">Recent Progress</div>
+          <div class="item-list">
+            <div class="item"><span class="item-icon">✅</span><span><strong>Weekly Cadence Approved:</strong> IDP approved for weekly releases with near-zero downtime — unblocks faster delivery going forward.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>LB RCA Complete:</strong> Rollback RCA completed and shared with CIO/SLT; correction items identified for next release window.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="milestone-wrap">
+          <span class="milestone-date">July 8, 2026</span>
+          <span class="milestone-badge">· Next:</span>
+          <span class="milestone-text">TLS 1.1 Upgrade + Q3 roadmap decision; IDP release targeting August</span>
+        </div>
+        <div class="source-links">
+          <a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Jun 26</a>
+          <a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 Jun 24</a>
+          <a href="https://fathom.video/calls/722649300" class="source-link" target="_blank">📋 Jun 25</a>
+        </div>
       </div>
     </div>
-  </div>
+
+  </div><!-- /card-grid -->
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
