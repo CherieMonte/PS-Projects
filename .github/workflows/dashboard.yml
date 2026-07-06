@@ -18,25 +18,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update dashboard date
-        run: |
-          python3 << 'PYEOF'
-          import re, datetime
-          now = datetime.datetime.now()
-          run_date = now.strftime('%Y-%m-%d')
-          run_date_long = now.strftime('%B %-d, %Y')
-          with open('index.html', 'r') as f:
-              html = f.read()
-          html = re.sub(r'<strong>\d{4}-\d{2}-\d{2}</strong>', f'<strong>{run_date}</strong>', html)
-          html = re.sub(
-              r'PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · [^<]+',
-              f'PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · {run_date_long}',
-              html
-          )
-          with open('index.html', 'w') as f:
-              f.write(html)
-          print(f'Date updated to {run_date}')
-          PYEOF
+      - name: Build updated dashboard
+        env:
+          JONNY_TOKEN: ${{ secrets.JONNY_TOKEN }}
+        run: python3 update_dashboard.py
 
       - name: Commit and push
         run: |
