@@ -2,8 +2,11 @@ name: Daily Dashboard Update
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # 10:00 AM MT (UTC-6) = 16:00 UTC
-  workflow_dispatch:        # Manual trigger from GitHub UI
+    - cron: '0 16 * * *'  # 10:00 AM MT = 16:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update-dashboard:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update dashboard date
         run: |
@@ -34,11 +39,9 @@ jobs:
           PYEOF
 
       - name: Commit and push
-        env:
-          PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
         run: |
           git config user.email "monteferrante@comcast.net"
           git config user.name "CherieMonte"
           git add index.html
           git diff --staged --quiet || git commit -m "Dashboard update $(date +'%B %-d, %Y')"
-          git push https://CherieMonte:${PUSH_TOKEN}@github.com/CherieMonte/PS-Projects.git main
+          git push
