@@ -168,7 +168,7 @@
     <div class="header-badge">✦ AI-Analyzed · Fathom Meeting Notes</div>
   </div>
   <div class="header-right">
-    <strong>2026-07-06</strong>
+    <strong>2026-07-07</strong>
     Source: Fathom standup &amp; review recordings<br>
     6 active projects · 6 at risk · 0 on track
   </div>
@@ -320,27 +320,27 @@
             <div class="card-title">🏗️ Atlanta AWS Migration</div>
             <div class="card-subtitle"><strong>Goal:</strong> Migrate PS Atlanta on-prem to AWS<br><strong>Timeline:</strong> Dec 2025 - August 2026.</div>
           </div>
-          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+          <span class="rag-pill rag-red"><span class="dot"></span> Off Track</span>
         </div>
-        <div class="exec-quote">Staging is one approval away from ready, but the pivot to production must land fast to protect the tight August 5 first migration window.</div>
-        <div class="exec-detail">Staging is nearly complete, blocked only by an FSx for ONTAP instance awaiting Tony&#x2019;s cost sign-off (~$226/mo). Per Tony&#x2019;s directive the team has pivoted to the production build &#x2014; new web servers, RabbitMQ, and application configuration &#x2014; to hit the first migration window on August 5. The phased customer rollout runs monthly through December, with Atlanta decommissioning to follow in 2027.</div>
+        <div class="exec-quote">The August 5 first-wave cutover was called unrealistic in the July 6 breakout: RabbitMQ&#x2019;s active-active limitation blocks isolated AWS validation, and a revised plan with added dev resources is being escalated.</div>
+        <div class="exec-detail">Staging has been deliberately paused to focus all resources on the critical path of QA and production, but the production cutover breakout surfaced a hard architectural blocker: RabbitMQ clusters cannot run active-active, so the AWS environment cannot be validated in isolation without immediately processing live production traffic. The August 5 wave also depends on a SignalR upgrade for TLS-only managed Redis that still needs a full release cycle. The team meets this week to build a revised QA/Prod plan and request dev support to parallelize work, protecting the phased customer rollout that runs monthly through December.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>FSx for ONTAP instance needs Tony&#x2019;s approval &#x2014; last staging blocker</span></div><div class="item"><span class="item-icon">⚠️</span><span>Expired certificate blocking staging ALB deployment and RabbitMQ cert re-roll</span></div><div class="item"><span class="item-icon">⚠️</span><span>No owner yet for formal load-testing plan after cold-cache performance issues in QA</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>RabbitMQ cannot run active-active &#x2014; no way to validate AWS in isolation without touching live production traffic</span></div><div class="item"><span class="item-icon">⚠️</span><span>Single-threaded dependency on James for application configuration; SignalR&#x2192;managed Redis needs a full release cycle before Aug 5</span></div><div class="item"><span class="item-icon">⚠️</span><span>Untracked dependencies: SSIS/SSRS build-out, LDAP fallback for 19 customers, and load testing that needs Dev/QA support</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Production migration plan made official and presented to 50+ customers</span></div><div class="item"><span class="item-icon">✅</span><span>Core production database EC2s spun up and replicating</span></div><div class="item"><span class="item-icon">✅</span><span>Staging EC2 builds essentially complete</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Production migration plan official and presented to 50+ customers; core prod database EC2s replicating</span></div><div class="item"><span class="item-icon">✅</span><span>SSRS epic created and SSIS placeholder tracked, closing previously untracked cutover gaps</span></div><div class="item"><span class="item-icon">✅</span><span>Staging nearly complete (file shares, DB config, ALBs) before the deliberate pivot to QA/Prod</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Aug 5 — first production migration wave</span>
+          <span class="milestone-text">🏁 Revised QA/Prod plan this week → Aug 5 wave-1 go/no-go</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/730984635" class="source-link" target="_blank">📋 Stand-up Jul 2</a><a href="https://fathom.video/calls/729864133" class="source-link" target="_blank">📋 Stand-up Jul 1</a><a href="https://fathom.video/calls/728843358" class="source-link" target="_blank">📋 Stand-up Jun 29</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/733722090" class="source-link" target="_blank">📋 Stand-up Jul 6</a><a href="https://fathom.video/calls/733722091" class="source-link" target="_blank">📋 Cutover Breakout Jul 6</a><a href="https://fathom.video/calls/730984635" class="source-link" target="_blank">📋 Stand-up Jul 2</a></div>
       </div>
     </div>
 
@@ -353,17 +353,17 @@
           </div>
           <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">EKS is nearing sign-off, developer capacity has been added, and remaining PRs are moving through review on schedule.</div>
-        <div class="exec-detail">The EKS cluster build is progressing well, with a final check-in and sign-off from Matt targeted for this week. Brandon has taken over Looker provisioning, adding data-plane capacity, and Dave&#x2019;s shared Redis security group fixes are in the review queue. An Argo CD/Helm alignment session with PerfectServe dev POC Adam is being scheduled to lock in the deployment setup.</div>
+        <div class="exec-quote">EKS sign-off is within reach, data-plane capacity was added, and remaining PRs are moving through review on schedule.</div>
+        <div class="exec-detail">The EKS cluster build is progressing well, with a final check-in and sign-off from Matt targeted for this week. Brandon has taken over Looker provisioning, adding data-plane capacity, and Dave&#x2019;s shared Redis security group fix PRs are in the review queue with Jon approving. An Argo CD/Helm alignment session with PerfectServe dev POC Adam is being scheduled to lock in the deployment setup.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>EKS verification hinges on Matt&#x2019;s availability &#x2014; no internal Telmediq EKS expert exists</span></div><div class="item"><span class="item-icon">⚠️</span><span>AWS account access for new team members stalled in the PerfectServe IAM process</span></div><div class="item"><span class="item-icon">⚠️</span><span>Argo CD/Helm setup clarity pending the meeting with Adam</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>EKS verification hinges on Matt&#x2019;s availability &#x2014; no internal Telmediq EKS expert exists</span></div><div class="item"><span class="item-icon">⚠️</span><span>AWS account access for new team members still stalled in the PerfectServe IAM process</span></div><div class="item"><span class="item-icon">⚠️</span><span>Argo CD/Helm setup clarity pending the meeting with Adam</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS module deployed with sign-off within reach</span></div><div class="item"><span class="item-icon">✅</span><span>Brandon onboarded to lead Looker provisioning</span></div><div class="item"><span class="item-icon">✅</span><span>Shared Redis security group fix PRs submitted for review</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS module deployed with final sign-off within reach</span></div><div class="item"><span class="item-icon">✅</span><span>Brandon onboarded to lead Looker provisioning</span></div><div class="item"><span class="item-icon">✅</span><span>Shared Redis security group fix PRs submitted for review</span></div></div>
         </div>
       </div>
       <div class="card-footer">
@@ -384,25 +384,25 @@
           </div>
           <span class="rag-pill rag-red"><span class="dot"></span> Off Track</span>
         </div>
-        <div class="exec-quote">Past the July 3 target with two unresolved PerfectServe dependencies blocking the final DMS migration; formal escalation is underway.</div>
-        <div class="exec-detail">The POC infrastructure is done &#x2014; the Aurora Global cluster is provisioned via Terraform and the DMS full-load configuration is ready &#x2014; but the final latency assessment is stalled on two PerfectServe dependencies: a missing code change from Miguel Rosales and an RDS flag flip to enable logical replication on an instance shared by Dev and QA. Lamine has paused billing hours, and Jon is posting a formal status escalation in the OC West channel tagging Jason.</div>
+        <div class="exec-quote">The July 3 target has passed and the fully validated deployment is stalled on two approvals: a manager-level review of Lamine&#x2019;s PR and Jason&#x2019;s go/no-go.</div>
+        <div class="exec-detail">The technical work is complete and de-risked &#x2014; a select-1 connectivity test from inside the app&#x2019;s VPC proved the DNS flip is safe, and Lamine is ready to execute the deployment (RDS reboot plus DNS flag flip) the same night approval lands. Miguel lacks the authority to approve the PR, so a manager sign-off is required, and Jon and Scott will present the go/no-go case directly to Jason in their 1-on-1.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>RDS flag flip affects a shared Dev/QA instance &#x2014; out-of-cycle change unlikely to be approved</span></div><div class="item"><span class="item-icon">⚠️</span><span>Promised connection-string code change from Miguel still missing</span></div><div class="item"><span class="item-icon">⚠️</span><span>Lamine may depart for a new role &#x2014; handoff plan to an existing LP resource needed</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Jason&#x2019;s go/no-go decision still pending &#x2014; every day of delay extends the overrun</span></div><div class="item"><span class="item-icon">⚠️</span><span>PR review blocked: Miguel lacks authority to approve, requiring a manager&#x2019;s sign-off</span></div><div class="item"><span class="item-icon">⚠️</span><span>Lamine may depart for a new role &#x2014; handoff plan to an existing LP resource needed</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Aurora Global cluster provisioned and running via Terraform</span></div><div class="item"><span class="item-icon">✅</span><span>Migration plan and schema analysis documentation completed</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>DNS flip validated safe via in-VPC connectivity test &#x2014; deployment ready to execute on approval</span></div><div class="item"><span class="item-icon">✅</span><span>Aurora Global cluster provisioned via Terraform; migration plan and schema analysis documented</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 RDS flag-flip approval → DMS full load → latency assessment</span>
+          <span class="milestone-text">🏁 Jason go/no-go at Jon &amp; Scott 1-on-1 → same-night deployment</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/730984648" class="source-link" target="_blank">📋 Stand-up Jul 2</a><a href="https://fathom.video/calls/725639508" class="source-link" target="_blank">📋 Stand-up Jun 29</a><a href="https://fathom.video/calls/725236168" class="source-link" target="_blank">📋 POC Strategy Jun 25</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/733722096" class="source-link" target="_blank">📋 Stand-up Jul 6</a><a href="https://fathom.video/calls/730984648" class="source-link" target="_blank">📋 Stand-up Jul 2</a><a href="https://fathom.video/calls/725639508" class="source-link" target="_blank">📋 Stand-up Jun 29</a></div>
       </div>
     </div>
 
@@ -415,23 +415,23 @@
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">Weekly-release approval is a breakthrough, but code review delays, a dev-blocking debug issue, and QA bottlenecks pressure the August release.</div>
-        <div class="exec-detail">IDP releases are now approved for weekly release windows with near-zero downtime, escaping the slow monthly maintenance cadence &#x2014; the July 8 TLS upgrade is a hard prerequisite. The June 17 release to the Lightning Bolt environment failed; the RCA is complete and correction items are identified for the next release window. The PS upgrade awaits a rescheduled final code review before QA deployment, keeping the August release target achievable but tight.</div>
+        <div class="exec-quote">Weekly-release approval is secured, but the July 8 TLS prerequisite, a dev-blocking debug issue, and QA bottlenecks keep the August release target tight.</div>
+        <div class="exec-detail">IDP releases are now approved for weekly release windows with near-zero downtime, escaping the slow monthly maintenance cadence &#x2014; the July 8 TLS upgrade is the hard prerequisite. The PS upgrade remains blocked from QA pending a rescheduled final code review, and a local queue-connection debugging failure, possibly tied to the Dev environment&#x2019;s AWS migration, is blocking development. The June 17 release to the Lightning Bolt environment failed; the RCA is complete and correction items are identified for the next release window.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development, possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy is a single-point QA bottleneck across concurrent AWS, TLS, and IDP testing</span></div><div class="item"><span class="item-icon">⚠️</span><span>Deployment strategy (on-prem vs. AWS Dev) still undefined</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development, possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy is a single-point QA bottleneck across concurrent AWS, TLS, and IDP testing</span></div><div class="item"><span class="item-icon">⚠️</span><span>Deployment strategy (on-prem vs. AWS Dev) undefined while customers migrate to AWS Prod through year-end</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Approval secured for weekly releases outside the maintenance window</span></div><div class="item"><span class="item-icon">✅</span><span>June 17 rollback RCA completed, shared with CIO, with corrective actions defined</span></div><div class="item"><span class="item-icon">✅</span><span>Sentry telemetry integration nearing validation</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Approval secured for weekly releases outside the maintenance window (1&#x2013;2 min downtime acceptable)</span></div><div class="item"><span class="item-icon">✅</span><span>June 17 Lightning Bolt RCA completed and shared with the CIO, with corrective actions defined</span></div><div class="item"><span class="item-icon">✅</span><span>Sentry telemetry integration nearing validation</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Jul 8 TLS upgrade — hard prerequisite for August IDP release</span>
+          <span class="milestone-text">🏁 Jul 8 TLS upgrade — hard prerequisite for the August IDP release</span>
         </div>
         <div class="source-links"><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Scrum of Scrums Jun 26</a><a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 IDP Sync Jun 24</a></div>
       </div>
@@ -440,7 +440,7 @@
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
-    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 6, 2026</span>
+    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 7, 2026</span>
   </footer>
 
 </main>
