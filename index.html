@@ -168,7 +168,7 @@
     <div class="header-badge">✦ AI-Analyzed · Fathom Meeting Notes</div>
   </div>
   <div class="header-right">
-    <strong>2026-07-08</strong>
+    <strong>2026-07-09</strong>
     Source: Fathom standup &amp; review recordings<br>
     6 active projects · 6 at risk · 0 on track
   </div>
@@ -322,25 +322,25 @@
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">The team is actively adapting the plan: the August 5 first wave was re-scoped to 23 must-have items under a production-first strategy, gated on a July 16 QA dry run.</div>
-        <div class="exec-detail">July 7 re-planning sessions re-scoped the August 5 first wave to 23 must-have items (20 stories, ~94 points &#x2014; feasible against the team&#x2019;s 22-story/month velocity): X-Web clusters 6, 8, 10, 2, and 3 move to AWS while their databases remain in Atlanta. The team pivoted to a production-first strategy, fully assigned the master migration list, and scheduled a 4-hour QA dry run for Thursday, July 16 to validate the cross-region architecture &#x2014; the hard gate for August 5. Tony is addressing the James bottleneck, with a LucidPoint assist resource and tiger-team sessions on the table.</div>
+        <div class="exec-quote">Aug 5 first-wave cutover remains achievable, but QA validation is gated on a new RabbitMQ cluster in QA and James&#x2019;s single-threaded configuration work.</div>
+        <div class="exec-detail">The team pivoted to a production-first QA strategy for the Aug 5 cutover: QA will mirror production phase-by-phase with soak time per wave, and all QA DNS will be unified to point at Atlanta QA. The master migration list is now fully assigned, Esteban is scripting the DNS-flip runbook (draft due next week), and staging databases are being rebuilt. QA testing is temporarily blocked pending a new RabbitMQ cluster in QA to enable an apples-to-apples comparison with production.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>July 16 QA dry run is a hard blocker for Aug 5 &#x2014; no confidence in the cross-region AWS apps &#x2194; Atlanta DBs config without it, and it depends on James&#x2019;s configuration work</span></div><div class="item"><span class="item-icon">⚠️</span><span>James remains the single-threaded bottleneck for application/CI/CD work; dev-support pulls threaten his dry-run prep</span></div><div class="item"><span class="item-icon">⚠️</span><span>Ops bandwidth stretched (3 of 4 on migration; Hassan pulled to Lightning Bolt) &#x2014; service desk response times at risk</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>QA testing blocked until a new RabbitMQ cluster in QA delivers Ansible-managed users and a service bus matching production</span></div><div class="item"><span class="item-icon">⚠️</span><span>James remains a single-threaded dependency for application configuration, keeping the Aug 5 date under pressure</span></div><div class="item"><span class="item-icon">⚠️</span><span>QA reliance on Betsy plus Hassan&#x2019;s pull to Lightning Bolt stretch team capacity across concurrent workstreams</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Aug 5 scope cut from 164 items to 23 must-haves, tracked via a JIRA filter as single source of truth</span></div><div class="item"><span class="item-icon">✅</span><span>Master migration list fully assigned &#x2014; ALB and DNS cutover moved to Joseph Maloney to de-risk Josh&#x2019;s leave</span></div><div class="item"><span class="item-icon">✅</span><span>Production-first strategy set with the QA dry run scheduled for July 16</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Master migration list fully assigned &#x2014; ALB and DNS cutover shifted to Joseph Maloney to de-risk the timeline</span></div><div class="item"><span class="item-icon">✅</span><span>QA strategy shift approved: team takes over QA, mirroring prod with phased soak time per migration wave</span></div><div class="item"><span class="item-icon">✅</span><span>DNS-flip runbook scripting underway with prod/QA URLs in hand; draft ready for review next week</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Jul 16 QA dry run — validation gate for the Aug 5 first wave</span>
+          <span class="milestone-text">🏁 Aug 5 production cutover wave 1 — QA validation session next Thursday</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/736870834" class="source-link" target="_blank">📋 Plan Alignment Jul 7</a><a href="https://fathom.video/calls/736707227" class="source-link" target="_blank">📋 Cutover Breakout Pt 2 Jul 7</a><a href="https://fathom.video/calls/735906316" class="source-link" target="_blank">📋 Stand-up Jul 7</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/737286290" class="source-link" target="_blank">📋 Stand-up Jul 8</a><a href="https://fathom.video/calls/738535380" class="source-link" target="_blank">📋 Cutover Breakout Pt 3 Jul 8</a><a href="https://fathom.video/calls/735906316" class="source-link" target="_blank">📋 Stand-up Jul 7</a></div>
       </div>
     </div>
 
@@ -351,27 +351,27 @@
             <div class="card-title">🇨🇦 Canada AWS Platform</div>
             <div class="card-subtitle"><strong>Goal:</strong> Spin up new Telmediq environment in the Canada region<br><strong>Timeline:</strong> April 22, 2026 - August 19, 2026.</div>
           </div>
-          <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
+          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">The EKS Carpenter blocker is resolved ahead of the verification meeting, and scope decisions (PG Bouncer EC2 MVP) are protecting the timeline.</div>
-        <div class="exec-detail">Dave&#x2019;s new Carpenter module version resolved the missing-policy failure, unblocking the EKS cluster deployment for the verification meeting with Matt. To protect the August 19 timeline, PG Bouncer will ship as an EC2 MVP with the EKS modernization deferred to a nice-to-do epic. Brandon continues leading Looker provisioning, while the New Relic strategy for Canada (separate vs. shared account) is deferred until Tony returns.</div>
+        <div class="exec-quote">The EKS cluster is provisioned but not operational, and an ArgoCD expertise gap makes the July 15 Helm migration milestone unrealistic.</div>
+        <div class="exec-detail">The Canadian EKS cluster is provisioned but unusable &#x2014; ArgoCD reports its connection status as &#x201C;unknown&#x201D; &#x2014; blocking application deployment and testing. With no internal ArgoCD expert after Vinny&#x2019;s departure, Jason is searching internally and Scott will source externally if needed. Meanwhile Adam&#x2019;s team is proceeding with Helm chart configuration (independent of cluster status), and scope decisions such as the PG Bouncer EC2 MVP continue to protect the Aug 19 timeline.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Integrations work halted: Hassan reassigned to Lightning Bolt, blocking three tickets &#x2014; escalation thread to Tony in motion</span></div><div class="item"><span class="item-icon">⚠️</span><span>New Relic strategy for Canada undecided (separate vs. shared account); deferred until Tony returns</span></div><div class="item"><span class="item-icon">⚠️</span><span>Looker HA requirement unknown &#x2014; decision-maker being identified in the main channel</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>EKS cluster not operational &#x2014; ArgoCD &#x201C;unknown&#x201D; status blocks deployment and end-to-end testing</span></div><div class="item"><span class="item-icon">⚠️</span><span>ArgoCD expertise gap after Vinny&#x2019;s departure makes the July 15 Helm chart deadline unrealistic</span></div><div class="item"><span class="item-icon">⚠️</span><span>Hassan reassigned to Lightning Bolt, halting three integration tickets; escalation to Tony in motion</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS Carpenter blocker resolved via new module version supporting external policies</span></div><div class="item"><span class="item-icon">✅</span><span>PG Bouncer descoped to an EC2 MVP, protecting the project timeline</span></div><div class="item"><span class="item-icon">✅</span><span>Brandon leading Looker provisioning, adding data-plane capacity</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS Carpenter blocker resolved via a new module version supporting external policies</span></div><div class="item"><span class="item-icon">✅</span><span>PG Bouncer descoped to an EC2 MVP, protecting the timeline; EKS modernization moved to a nice-to-do epic</span></div><div class="item"><span class="item-icon">✅</span><span>Adam&#x2019;s team proceeding with Helm chart configuration for Canadian deployments</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 EKS cluster verification meeting with Matt</span>
+          <span class="milestone-text">🏁 ArgoCD expert onboarded → EKS cluster operational for Helm deployment</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/735906313" class="source-link" target="_blank">📋 Weekly Stand-up Jul 7</a><a href="https://fathom.video/calls/730984642" class="source-link" target="_blank">📋 Weekly Check-In Jul 2</a><a href="https://fathom.video/calls/725639518" class="source-link" target="_blank">📋 Stand-up Jun 29</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/739662177" class="source-link" target="_blank">📋 ArgoCD/Helm Discussion Jul 8</a><a href="https://fathom.video/calls/735906313" class="source-link" target="_blank">📋 Weekly Stand-up Jul 7</a><a href="https://fathom.video/calls/725639518" class="source-link" target="_blank">📋 Collab Stand-up Jun 29</a></div>
       </div>
     </div>
 
@@ -382,25 +382,25 @@
             <div class="card-title">🌐 OC West Expansion</div>
             <div class="card-subtitle"><strong>Goal:</strong> Test Latency of Aurora Global for the OC West expansion.<br><strong>Timeline:</strong> June 22, 2026 - July 3, 2026.</div>
           </div>
-          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+          <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">Blockers cleared &#x2014; approvals are in and the team is ready to execute the DMS full load; recovering from the July 3 schedule overrun.</div>
-        <div class="exec-detail">PM confirmed July 8 that the project is unblocked and ready to run the DMS full load. Execution is a low-risk sequence &#x2014; RDS reboot plus DNS flag flip, previously validated safe via an in-VPC connectivity test &#x2014; followed by the full load monitored in CloudWatch. The remaining deliverable is the final latency assessment (East vs. West) that informs the customer&#x2019;s contract-vs-ROI decision.</div>
+        <div class="exec-quote">DMS full load kicked off the night of July 8 with all approvals landed and no open blockers.</div>
+        <div class="exec-detail">The DMS full load is executing &#x2014; kicked off the night of July 8 after all approvals landed &#x2014; with an estimated 1&#x2013;2 day run monitored in CloudWatch. The DNS flip was previously validated safe via an in-VPC connectivity test, and the Aurora Global cluster, migration plan, and schema analysis are complete. The remaining deliverable is the final East-vs-West latency assessment that informs the customer&#x2019;s contract-vs-ROI decision.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>DMS full-load duration unknown (est. 1&#x2013;2 days), extending the overrun past the original July 3 target</span></div><div class="item"><span class="item-icon">⚠️</span><span>Lamine may depart for a new role &#x2014; handoff plan to an existing LP resource still needed</span></div><div class="item"><span class="item-icon">⚠️</span><span>Project already at its 30-hour weekly budget; hours must be managed through the final assessment</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Watch item: full-load duration estimated at 1&#x2013;2 days; completion being monitored in CloudWatch</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: handoff contingency needed if Lamine departs &#x2014; existing LP resource preferred to avoid re-onboarding</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: project at its 30-hour weekly budget; hours managed through the final assessment</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Deployment unblocked &#x2014; DMS full load ready to execute</span></div><div class="item"><span class="item-icon">✅</span><span>DNS flip validated safe via in-VPC connectivity test from the app&#x2019;s VPC</span></div><div class="item"><span class="item-icon">✅</span><span>Aurora Global cluster provisioned via Terraform; migration plan and schema analysis documented</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>All approvals landed &#x2014; DMS full load kicked off the night of July 8</span></div><div class="item"><span class="item-icon">✅</span><span>DNS flip validated safe via an in-VPC connectivity test from the app&#x2019;s VPC</span></div><div class="item"><span class="item-icon">✅</span><span>Aurora Global cluster provisioned via Terraform; migration plan and schema analysis documented</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Execute DMS full load → final latency assessment (East vs. West)</span>
+          <span class="milestone-text">🏁 Full load completion (est. 12 days) → final East-vs-West latency assessment</span>
         </div>
         <div class="source-links"><a href="https://fathom.video/calls/733722096" class="source-link" target="_blank">📋 Stand-up Jul 6</a><a href="https://fathom.video/calls/730984648" class="source-link" target="_blank">📋 Stand-up Jul 2</a><a href="https://fathom.video/calls/725639508" class="source-link" target="_blank">📋 Stand-up Jun 29</a></div>
       </div>
@@ -415,32 +415,32 @@
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">Weekly-release approval is secured, but the CC/OC work was omitted from the Q3 PI plan, and the TLS prerequisite, a dev-blocking debug issue, and QA bottlenecks keep the August target tight.</div>
-        <div class="exec-detail">IDP releases are approved for weekly release windows with near-zero downtime &#x2014; the July 8 TLS upgrade is the hard prerequisite. The CC/OC Q3 planning session confirmed the CC and OC work was omitted from the Q3 PI plan, so a capacity trade-off discussion is needed; the team will first run spikes to define the technical work and use the findings to drive the Q3 scheduling decision. Brian Noyes is updating design diagrams and stories for the hybrid SCIM architecture, helping Adan define the CC/OC spike scope, and targeting an Identity vNext environment deployment within 2&#x2013;3 weeks to enable introspection testing. The June 17 Lightning Bolt release failure has a completed RCA with correction items identified for the next release window.</div>
+        <div class="exec-quote">The upgrade path is on track for the July 15 release challenge, but CC/OC work omitted from the Q3 PI plan leaves capacity and timeline unresolved.</div>
+        <div class="exec-detail">The upgrade project is on track for its July 15 release challenge, clearing the path for the vNext deployment; Brian unblocked the OCCC team by configuring the upgrade environment for their Phase 3 spike. CC and OC work was omitted from the Q3 PI plan, so a trade-off discussion is needed &#x2014; the team will run spikes first to define the technical work, with findings driving the Q3 scheduling decision. Brian Noyes is updating hybrid SCIM design diagrams and story details, helping Adan scope the CC/OC spike, and deploying Identity vNext to an environment within 2&#x2013;3 weeks for introspection testing. Lightning Bolt go-live moved to mid-August as a scheduling buffer.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>CC/OC work omitted from the Q3 PI plan &#x2014; timeline and capacity reallocation unresolved until the spikes complete and the trade-off discussion lands</span></div><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development, possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy is a single-point QA bottleneck across concurrent AWS, TLS, and IDP testing</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>CC/OC work omitted from the Q3 PI plan &#x2014; capacity reallocation and timeline unresolved pending spike findings</span></div><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development; root cause possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy remains a single-point QA bottleneck across concurrent AWS, TLS, and IDP testing</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Approval secured for weekly releases outside the maintenance window (1&#x2013;2 min downtime acceptable)</span></div><div class="item"><span class="item-icon">✅</span><span>Q3 path forward defined: CC/OC spikes scoped (Brian &amp; Adan) with findings to inform Q3 scheduling; Identity vNext env deployment targeted in 2&#x2013;3 weeks for introspection testing</span></div><div class="item"><span class="item-icon">✅</span><span>June 17 Lightning Bolt RCA completed and shared with the CIO, with corrective actions defined</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>OCCC team unblocked via upgrade-environment configuration, bypassing the vNext deployment dependency</span></div><div class="item"><span class="item-icon">✅</span><span>Weekly-release approval secured; June 17 Lightning Bolt release failure RCA completed with correction items identified for the next release window</span></div><div class="item"><span class="item-icon">✅</span><span>Identity vNext environment deployment targeted within 2&#x2013;3 weeks to enable introspection testing</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Jul 8 TLS upgrade; Identity vNext env deploy within 23 weeks</span>
+          <span class="milestone-text">🏁 Jul 15 upgrade release challenge → vNext deployment path</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Scrum of Scrums Jun 26</a><a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 IDP Sync Jun 24</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/737286259" class="source-link" target="_blank">📋 IDP Sync Jul 8</a><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Scrum of Scrums Jun 26</a></div>
       </div>
     </div>
   </div><!-- /card-grid -->
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
-    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 8, 2026</span>
+    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 9, 2026</span>
   </footer>
 
 </main>
