@@ -168,7 +168,7 @@
     <div class="header-badge">✦ AI-Analyzed · Fathom Meeting Notes</div>
   </div>
   <div class="header-right">
-    <strong>2026-07-11</strong>
+    <strong>2026-07-12</strong>
     Source: Fathom standup &amp; review recordings<br>
     6 active projects · 6 at risk · 0 on track
   </div>
@@ -317,13 +317,13 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🏗️ &#x1F3D7;&#xFE0F; Atlanta AWS Migration</div>
+            <div class="card-title">🏗️ Atlanta AWS Migration</div>
             <div class="card-subtitle"><strong>Goal:</strong> Migrate PS Atlanta on-prem to AWS<br><strong>Timeline:</strong> Dec 2025 - August 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
         <div class="exec-quote">Aug 5 wave-1 cutover is holding, but a blocked V4 import and an unresolved load-testing gap keep schedule pressure on the critical path.</div>
-        <div class="exec-detail">QA testing is now unblocked &#x2014; staging databases were rebuilt, a new RabbitMQ cluster in QA is standing up, and QA traffic routes to Atlanta, enabling granular app-flip testing for Groups 1 and 2. The team has taken over QA for the Aug 5 deadline, mirroring production phase-by-phase with soak time between waves. Esteban&#x2019;s DNS-flip migration runbook is due for review next Thursday, and a load-testing plan (likely K6, informed by Pendo hotspot data) will be scoped with James and Tony next week.</div>
+        <div class="exec-detail">QA testing is unblocked &#x2014; staging databases were rebuilt, a new RabbitMQ cluster in QA is standing up, and QA traffic now routes to Atlanta, enabling granular app-flip testing for Groups 1 and 2. The team has taken over QA for the Aug 5 deadline, mirroring production phase-by-phase with soak time between waves. Esteban&#x2019;s DNS-flip migration runbook is due for review by Thursday, and a load-testing plan (likely K6, informed by Pendo hotspot data) will be scoped with James and Tony this week.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
@@ -332,13 +332,13 @@
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>QA testing unblocked: staging DBs rebuilt, a new RabbitMQ cluster in QA, and QA traffic rerouted to ATL</span></div><div class="item"><span class="item-icon">✅</span><span>QA strategy approved: team-run QA mirrors prod with phased soak time per migration wave; QA DNS unified to Atlanta QA</span></div><div class="item"><span class="item-icon">✅</span><span>DNS-flip runbook scripting on track &#x2014; code due for review next Thursday</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>QA testing unblocked: staging DBs rebuilt, a new RabbitMQ cluster in QA, and QA traffic rerouted to ATL</span></div><div class="item"><span class="item-icon">✅</span><span>QA strategy approved: team-run QA mirrors prod with phased soak time per wave; QA DNS unified to Atlanta QA</span></div><div class="item"><span class="item-icon">✅</span><span>DNS-flip runbook scripting on track &#x2014; code due for review Thursday</span></div></div>
         </div>
       </div>
       <div class="card-footer">
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Aug 5 wave-1 production cutover — runbook review next Thursday</span>
+          <span class="milestone-text">🏁 Aug 5 wave-1 production cutover — runbook review Thu Jul 16</span>
         </div>
         <div class="source-links"><a href="https://fathom.video/calls/739636433" class="source-link" target="_blank">📋 Stand-up Jul 9</a><a href="https://fathom.video/calls/737286290" class="source-link" target="_blank">📋 Stand-up Jul 8</a><a href="https://fathom.video/calls/738535380" class="source-link" target="_blank">📋 Cutover Breakout Jul 8</a></div>
       </div>
@@ -348,7 +348,7 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🇨🇦 &#x1F1E8;&#x1F1E6; Canada AWS Platform</div>
+            <div class="card-title">🇨🇦 Canada AWS Platform</div>
             <div class="card-subtitle"><strong>Goal:</strong> Spin up new Telmediq environment in the Canada region<br><strong>Timeline:</strong> April 22, 2026 - August 19, 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
@@ -379,18 +379,18 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🌐 &#x1F310; OC West Expansion</div>
+            <div class="card-title">🌐 OC West Expansion</div>
             <div class="card-subtitle"><strong>Goal:</strong> Test Latency of Aurora Global for the OC West expansion.<br><strong>Timeline:</strong> June 22, 2026 - July 3, 2026.</div>
           </div>
           <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">DMS full load is ~100% complete with no open blockers; remaining large-table retries are in hand and the CNAME flip is gated only by sync completion and sub-5s replication lag.</div>
-        <div class="exec-detail">The DMS full load kicked off the night of July 8 and reached ~100% by July 9; a handful of large, JSON-heavy tables (2&#x2013;3M rows, 1GB+) failed and are being manually retried &#x2014; a known DMS limitation &#x2014; with resolution targeted by end of day and over the weekend, monitored in CloudWatch. A dashboard tracks replication lag against the 5-second go/no-go threshold gating the CNAME flip to Aurora, after which a US-West-2 instance will be provisioned via Terraform for the final East-vs-West latency assessment informing the customer&#x2019;s contract-vs-ROI decision. Full expansion is estimated for the end of next week.</div>
+        <div class="exec-quote">DMS full load reached ~100% with no open approval blockers; the CNAME flip is gated only by large-table retries completing and replication lag holding under 5 seconds.</div>
+        <div class="exec-detail">The DMS full load kicked off the night of July 8 and reached roughly 100% by July 9; a handful of large, JSON-heavy tables (2&#x2013;3M rows, 1GB+) failed and are being manually retried &#x2014; a known DMS limitation &#x2014; with resolution targeted over the weekend and progress monitored in CloudWatch. A dashboard tracks replication lag against the 5-second go/no-go threshold gating the CNAME flip to Aurora, after which a US-West-2 instance will be provisioned via Terraform for the final East-vs-West latency assessment informing the customer&#x2019;s contract-vs-ROI decision. Full expansion is estimated for the end of next week.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Watch item: large-table load failures require manual retries and could stretch the load window into the weekend</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: replication lag must hold consistently below 5 seconds before the CNAME flip can proceed</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: single-resource dependency on Lamine; Mark can source AWS DMS SMEs if a major blocker arises</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Watch item: large-table load failures require manual retries and could stretch the load window through the weekend</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: replication lag must hold consistently below 5 seconds before the CNAME flip can proceed</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: single-resource dependency on Lamine; Mark can source AWS DMS SMEs if a major blocker arises</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
@@ -410,7 +410,7 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🛑 &#x1F510; IDP</div>
+            <div class="card-title">🛑 IDP</div>
             <div class="card-subtitle"><strong>Goal:</strong> Upgrade the IDP to Duende and vNext<br><strong>Timeline:</strong> Dec 1, 2025 - Nov 4, 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
@@ -440,7 +440,7 @@
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
-    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 11, 2026</span>
+    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 12, 2026</span>
   </footer>
 
 </main>
