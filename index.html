@@ -279,24 +279,24 @@
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">Customer engagement improving post-webinar but migration rate remains critically low. New delete endpoint introduces domain-association data risk requiring UI guardrails before release.</div>
-        <div class="exec-detail">Carilion shifted from a January delay to a July 9 cutover after webinar clarified the August 31 hard stop. Phase 2 delete endpoint approved Jun 30 but a legacy domain-based flaw means removals affect all authenticators sharing a domain. Each cutover requires a dedicated Fortify engineer until CSP Portal bulk upload goes live.</div>
+        <div class="exec-quote">Customer engagement is a growing concern — many customers not responding to outreach. Progress is happening but needs to accelerate significantly to hit the 50% migration milestone by July 30.</div>
+        <div class="exec-detail">Customer engagement remains a critical concern with many customers not responding to outreach — migration pace must accelerate significantly to reach the 50% milestone by July 30. Two new issues surfaced: a testing coordination gap where CS lacks a defined process for test-user calls (engineering confirmed they should be on standby only, not configuring test users), and a Mercy domain bug where Mercy's domains added to CSP are incorrectly pulling in Mercy Des Moines organizations (5 wrong HSOs) — a DevPort bug ticket needs to be created and posted in PS Engineering.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
           <div class="item-list">
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>Low Migration Rate:</strong> OIDC previously missed June 9 target. August 31 is hard-communicated — CSA bandwidth is top risk.</span></div>
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>Domain Delete Flaw:</strong> Endpoint operates on domain name (not ID) — affects ALL authenticators sharing a domain. Data deletion risk without UI guardrails.</span></div>
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>Fortify Bottleneck:</strong> Each cutover needs a dedicated Fortify engineer until bulk upload goes live — hard capacity constraint July–August.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Customer Engagement Critical:</strong> Many customers not responding to outreach. Must accelerate significantly to hit 50% migration milestone by July 30.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>OIDC Testing Coordination Gap:</strong> CS lacks a defined process for test-user calls — who sets up users, who is on engineering standby, and how to reserve engineering time via Support ticket. Engineering should NOT configure test users; standby for real-time issue support only.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Mercy Domain Bug:</strong> Mercy domains added to CSP are incorrectly pulling in Mercy Des Moines organizations (5 wrong HSOs). DevPort bug ticket must be created and posted in PS Engineering.</span></div>
           </div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
           <div class="item-list">
-            <div class="item"><span class="item-icon">✅</span><span><strong>Carilion Jul 9 Scheduled:</strong> After requesting January delay, Carilion submitted July 9 ticket. Kevin to confirm via CAB.</span></div>
-            <div class="item"><span class="item-icon">✅</span><span><strong>Delete Endpoint Approved:</strong> Phase 2 approved Jun 30; reduces manual support tickets once live with proper guardrails.</span></div>
-            <div class="item"><span class="item-icon">✅</span><span><strong>Data Cleanup Underway:</strong> Jeremy vetting anomalous OIDC accounts to identify deactivation candidates and reduce scope.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Migration Progress Ongoing:</strong> Customers are migrating — pace must accelerate to meet July 30 milestone. CSA outreach continuing.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Engineering Standby Process Clarified:</strong> Engineering confirmed role boundary — available for real-time issue support during cutovers, not test user configuration.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Mercy Bug Identified:</strong> Domain misconfiguration caught early — DevPort ticket being created to resolve 5 incorrect HSO associations before they impact cutovers.</span></div>
           </div>
         </div>
       </div>
@@ -304,7 +304,7 @@
         <div class="milestone-wrap">
           <span class="milestone-date">July 9, 2026</span>
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">Carilion OIDC Cutover — CAB approval + Fortify engineer</span>
+          <span class="milestone-text">50% customer migration by July 30 — accelerate CSA outreach + resolve Mercy domain bug + define testing coordination process</span>
         </div>
         <div class="source-links">
           <a href="https://fathom.video/calls/727821907" class="source-link" target="_blank">📋 Jun 30</a>
