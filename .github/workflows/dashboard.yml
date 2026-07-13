@@ -21,6 +21,7 @@ jobs:
       - name: Build updated dashboard
         env:
           JONNY_TOKEN: ${{ secrets.JONNY_TOKEN }}
+          SMARTSHEET_TOKEN: ${{ secrets.SMARTSHEET_TOKEN }}
         run: python3 update_dashboard.py
 
       - name: Commit and push
