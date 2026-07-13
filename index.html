@@ -188,8 +188,8 @@
 <!-- ── Status bar ── -->
 <div class="status-bar">
   <div class="status-item">
-    <span class="status-dot dot-yellow"></span>
-    <div><div class="status-item-name">Genesys → Twilio</div><div class="status-item-label">AT RISK</div></div>
+    <span class="status-dot dot-red"></span>
+    <div><div class="status-item-name">Genesys → Twilio</div><div class="status-item-label">RED 🔴</div></div>
   </div>
   <div class="status-item">
     <span class="status-dot dot-yellow"></span>
@@ -230,28 +230,28 @@
         <div class="card-header-top">
           <div>
             <div class="card-title">📞 Genesys Deprecation → Twilio</div>
-            <div class="card-subtitle"><strong>Goal:</strong> Replace the legacy Genesys platform and eventually turning it off<br><strong>Timeline:</strong> Dec 2025 - July 2027</div>
+            <div class="card-subtitle"><strong>Goal:</strong> Replace the legacy Genesys platform and eventually turning it off<br><strong>Timeline:</strong> Dec 2025 - July 2027<br><strong>% Complete:</strong> TBD</div>
           </div>
-          <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
+          <span class="rag-pill rag-red"><span class="dot"></span> Red 🔴</span>
         </div>
-        <div class="exec-quote">Twilio routing update: 28,492 remaining Toll Free numbers from July 2nd finished the morning of July 6th. Local numbers scheduled for July 6th.</div>
-        <div class="exec-detail">28,000 TFNs completed July 2–6. 657 local numbers ported July 6 with some resubmitted; awaiting Twilio confirmation on port date for 276 resubmitted numbers. Team is focusing on prerequisite code cleanup to prevent environment inconsistencies before contractors begin work.</div>
+        <div class="exec-quote">Status as of 7/13/26: ~24 TFNs remain unported — roughly half unassigned/test customers, the other half pending Five9s confirmation. Local number porting has run into additional issues; awaiting update from Doug. Team pivoting to prerequisites and epic grooming.</div>
+        <div class="exec-detail">28,000 TFNs completed July 2–6. Approximately 24 TFNs remain unported: roughly half are unassigned or test customers; the other half are being confirmed with Five9s. Local number status is pending — Doug is working through additional issues that have surfaced. Team is focusing on prerequisites and epic grooming before contractors begin development work. Dev &amp; QA environment issues continue to slow development and deployments.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
           <div class="item-list">
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>276 Resubmitted Local Numbers:</strong> Awaiting Twilio confirmation on port date. Status TBD.</span></div>
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>SFTP Blocked:</strong> CS can't schedule migrations until docs and customer list delivered — threatens July 30 milestone.</span></div>
-            <div class="item"><span class="item-icon">⚠️</span><span><strong>Dev &amp; QA Environment Issues:</strong> Environment instability is slowing development and deployments, delaying contractor onboarding readiness.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>~24 TFNs Unported:</strong> ~Half are unassigned/test customers; remaining half pending Five9s confirmation. Final resolution TBD.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Local Number Issues:</strong> Local number porting has run into additional issues. Awaiting specific status update from Doug.</span></div>
+            <div class="item"><span class="item-icon">⚠️</span><span><strong>Dev &amp; QA Environment Issues:</strong> Ongoing environment instability is slowing development and deployments, blocking contractor readiness and sprint progress.</span></div>
           </div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
           <div class="item-list">
             <div class="item"><span class="item-icon">✅</span><span><strong>28,000 TFNs Ported:</strong> Toll-free number porting completed July 2&#x2013;6. 657 local numbers ported July 6.</span></div>
-            <div class="item"><span class="item-icon">✅</span><span><strong>Five9s Unblocked:</strong> Five9s confirmed SIP trunk capability — migration proceeds once config details provided.</span></div>
-            <div class="item"><span class="item-icon">✅</span><span><strong>Contractors Onboarded:</strong> Team completing code prerequisite cleanup to ensure environment consistency before contractor work begins.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Prerequisites Underway:</strong> Team focused on epic grooming and prerequisite cleanup to ensure code consistency before contractors start work.</span></div>
+            <div class="item"><span class="item-icon">✅</span><span><strong>Five9s Coordination Active:</strong> Confirming ~12 remaining TFNs with Five9s to close out final unported numbers.</span></div>
           </div>
         </div>
       </div>
@@ -259,7 +259,7 @@
         <div class="milestone-wrap">
           <span class="milestone-date">July 2, 2026</span>
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">Complete remaining local numbers: TBD</span>
+          <span class="milestone-text">Complete remaining local numbers: TBD — ~24 TFNs pending (Five9s confirmation + Doug's local number update) · Team on prerequisites &amp; epic grooming</span>
         </div>
         <div class="source-links">
           <a href="https://fathom.video/calls/725797616" class="source-link" target="_blank">📋 Jun 29</a>
