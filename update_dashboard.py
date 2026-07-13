@@ -15,8 +15,8 @@ PROJECT_MAP = {
     "PER Solliance Identity Server Rollout": "idp",
     "PER OC Multi-Region Active POC":        "ocwest",
     "PER Canadian CC Platform":              "canada",
-    "PER Genesys":                           "genesys",
-    "PER LDAP":                              "oidc",
+    "PER PS APP SM Services":                "genesys",
+    "PER Lightning Bolt DevIQ 2026":         "oidc",
 }
 
 def ss_get(path):
