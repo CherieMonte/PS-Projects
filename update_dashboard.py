@@ -36,47 +36,32 @@ def ss_get(path):
 if ss_token:
     print("Fetching Smartsheet budget data...")
 
-    # Hours Forecasting sheet (176228980969348)
-    # Columns: Numbers, Projects, Budget (Hours), Incurred (Hours), % Complete, ...
-    # Contains all PER projects including PER PS APP SM Services
-    SHEET_CONFIGS = [
-        {
-            "id":       "176228980969348",   # Hours Forecasting
-            "primary":  "Projects",
-            "budget":   "Budget (Hours)",
-            "incurred": "Incurred (Hours)",
-        },
-        {
-            "id":       "6854780065369988",  # Mgmnt Project Percent Data (fallback)
-            "primary":  "Project",
-            "budget":   "Budget Hours",
-            "incurred": "Total Incurred Hours",
-        },
-    ]
+    # Hours Forecasting sheet (ID: 176228980969348)
+    # Columns: Numbers, Projects, Budget (Hours), Incurred (Hours)
+    # We match on the "Projects" column using exact project names
+    HOURS_SHEET_ID = "176228980969348"
+    sheet = ss_get(f"sheets/{HOURS_SHEET_ID}")
 
-    for cfg in SHEET_CONFIGS:
-        sheet = ss_get(f"sheets/{cfg['id']}")
-        if not sheet:
-            print(f"WARNING: Could not fetch sheet {cfg['id']}")
-            continue
+    if sheet:
         cols = [c["title"] for c in sheet.get("columns", [])]
+        print(f"Columns found: {cols}")
         for row in sheet.get("rows", []):
-            cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
-            if not cells or not cells[0]:
-                continue
+            cells    = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
             row_dict = dict(zip(cols, cells))
-            primary  = str(cells[0])
+            # Primary column might be "Projects" or "Numbers" — check both
+            primary  = str(row_dict.get("Projects") or row_dict.get("Primary") or cells[0] if cells else "")
+            print(f"  Row: {primary[:60]}")
 
             matched_key = None
             for map_name, key in PROJECT_MAP.items():
-                if map_name.lower() == primary.lower() or map_name.lower() in primary.lower():
+                if primary.strip().lower() == map_name.strip().lower():
                     matched_key = key
                     break
 
             if matched_key and matched_key not in budget_data:
                 try:
-                    budget   = float(str(row_dict.get(cfg["budget"])   or 0).replace(",",""))
-                    incurred = float(str(row_dict.get(cfg["incurred"]) or 0).replace(",",""))
+                    budget   = float(str(row_dict.get("Budget (Hours)") or row_dict.get("Budget Hours") or 0).replace(",",""))
+                    incurred = float(str(row_dict.get("Incurred (Hours)") or row_dict.get("Total Incurred Hours") or 0).replace(",",""))
                     if not budget:
                         continue
                     pct       = min(round(incurred / budget * 100, 1), 100)
@@ -87,9 +72,11 @@ if ss_token:
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
+                    print(f"  MATCHED {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
                 except Exception as e:
                     print(f"  WARNING: Could not parse {primary}: {e}")
+    else:
+        print("WARNING: Could not fetch Hours Forecasting sheet")
 
 print(f"Budget data found for: {list(budget_data.keys())}")
 
