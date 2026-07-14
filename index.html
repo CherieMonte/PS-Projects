@@ -152,13 +152,13 @@
 
 
   /* ── Budget bar ── */
-  .budget-bar-wrap { margin-top:14px; padding-top:12px; border-top:1px solid #f1f3f7; }
+  .budget-bar-wrap { margin:12px 0 4px; padding:12px 0 0; border-top:1px solid #f1f3f7; }
   .budget-bar-top  { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
   .budget-dot      { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
   .budget-label    { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280; flex:1; }
-  .budget-used     { font-size:0.72rem; font-weight:600; color:#374151; }
+  .budget-used     { font-size:0.72rem; font-weight:600; color:#374151; white-space:nowrap; }
   .budget-track    { background:#e5e7eb; border-radius:999px; height:6px; overflow:hidden; margin-bottom:5px; }
-  .budget-fill     { height:100%; border-radius:999px; transition:width 0.3s ease; }
+  .budget-fill     { height:100%; border-radius:999px; }
   .budget-sub      { font-size:0.68rem; color:#9ca3af; }
 
   /* ── Page footer ── */
@@ -276,6 +276,7 @@
         </div>
       </div>
       <div class="card-footer">
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">118 / 600 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:19.7%;background:#16a34a"></div></div><div class="budget-sub">482 hrs remaining &nbsp;·&nbsp; 19.7% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div>
       
       <div class="card-footer">
       <!-- /card-grid -->
