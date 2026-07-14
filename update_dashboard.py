@@ -10,13 +10,15 @@ ss_token = os.environ.get("SMARTSHEET_TOKEN", "")
 budget_data = {}
 
 # Map Smartsheet Primary names → dashboard card keys
+# Exact Smartsheet row names → dashboard card keys
+# Source: Project Manager Dashboard > Project Hours At Risk widget
 PROJECT_MAP = {
-    "PER Atlanta DC Mobilization":           "atlanta",
-    "PER Solliance Identity Server Rollout": "idp",
-    "PER OC Multi-Region Active POC":        "ocwest",
-    "PER Canadian CC Platform":              "canada",
-    "PER PS APP SM Services":                "genesys",
-    "PER Lightning Bolt DevIQ 2026":         "oidc",
+    "PER PS APP SM Services":                "genesys",  # Budget:500, Incurred:117.5
+    "PER Lightning Bolt DevIQ 2026":         "oidc",     # Budget:480, Incurred:305.5
+    "PER Atlanta DC Mobilization":           "atlanta",  # Budget:3379, Incurred:2226
+    "PER Canadian CC Platform":              "canada",   # Budget:2210, Incurred:1603
+    "PER Solliance Identity Server Rollout": "idp",      # Budget:260, Incurred:198
+    "PER OC Multi-Region Active POC":        "ocwest",   # Budget:118, Incurred:22
 }
 
 def ss_get(path):
@@ -34,24 +36,18 @@ def ss_get(path):
 if ss_token:
     print("Fetching Smartsheet budget data...")
 
-    # ── Explicit per-project budget lookup ────────────────────────
-    # Sheet 1: Budget - Hours Data (6866540340137860)
-    #   Columns: Primary, "Budget (hours)", "Incurred (hours)"
-    #   Projects: PER PS APP SM Services (genesys), PER Canadian CC Platform (canada)
-    # Sheet 2: Mgmnt Project Percent Data (6854780065369988)
-    #   Columns: Project, "Budget Hours", "Total Incurred Hours"
-    #   Projects: PER Atlanta DC Mobilization, PER Lightning Bolt DevIQ 2026 (oidc),
-    #             PER Solliance Identity Server Rollout, PER OC Multi-Region Active POC
-
+    # Hours Forecasting sheet (176228980969348)
+    # Columns: Numbers, Projects, Budget (Hours), Incurred (Hours), % Complete, ...
+    # Contains all PER projects including PER PS APP SM Services
     SHEET_CONFIGS = [
         {
-            "id":       "6866540340137860",
-            "primary":  "Primary",
-            "budget":   "Budget (hours)",
-            "incurred": "Incurred (hours)",
+            "id":       "176228980969348",   # Hours Forecasting
+            "primary":  "Projects",
+            "budget":   "Budget (Hours)",
+            "incurred": "Incurred (Hours)",
         },
         {
-            "id":       "6854780065369988",
+            "id":       "6854780065369988",  # Mgmnt Project Percent Data (fallback)
             "primary":  "Project",
             "budget":   "Budget Hours",
             "incurred": "Total Incurred Hours",
@@ -73,7 +69,7 @@ if ss_token:
 
             matched_key = None
             for map_name, key in PROJECT_MAP.items():
-                if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
+                if map_name.lower() == primary.lower() or map_name.lower() in primary.lower():
                     matched_key = key
                     break
 
@@ -91,7 +87,7 @@ if ss_token:
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status} [{primary}]")
+                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
                 except Exception as e:
                     print(f"  WARNING: Could not parse {primary}: {e}")
 
