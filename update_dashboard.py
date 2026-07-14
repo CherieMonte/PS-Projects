@@ -33,14 +33,37 @@ def ss_get(path):
 
 if ss_token:
     print("Fetching Smartsheet budget data...")
-    # Use Mgmnt Project Percent Data sheet directly (confirmed ID: 6854780065369988)
-    # Columns: Project, Budget Hours, Total Incurred Hours, % Hours Used
-    SHEET_ID = "6854780065369988"
-    sheet = ss_get(f"sheets/{SHEET_ID}")
 
-    if sheet:
+    # ── Explicit per-project budget lookup ────────────────────────
+    # Sheet 1: Budget - Hours Data (6866540340137860)
+    #   Columns: Primary, "Budget (hours)", "Incurred (hours)"
+    #   Projects: PER PS APP SM Services (genesys), PER Canadian CC Platform (canada)
+    # Sheet 2: Mgmnt Project Percent Data (6854780065369988)
+    #   Columns: Project, "Budget Hours", "Total Incurred Hours"
+    #   Projects: PER Atlanta DC Mobilization, PER Lightning Bolt DevIQ 2026 (oidc),
+    #             PER Solliance Identity Server Rollout, PER OC Multi-Region Active POC
+
+    SHEET_CONFIGS = [
+        {
+            "id":       "6866540340137860",
+            "primary":  "Primary",
+            "budget":   "Budget (hours)",
+            "incurred": "Incurred (hours)",
+        },
+        {
+            "id":       "6854780065369988",
+            "primary":  "Project",
+            "budget":   "Budget Hours",
+            "incurred": "Total Incurred Hours",
+        },
+    ]
+
+    for cfg in SHEET_CONFIGS:
+        sheet = ss_get(f"sheets/{cfg['id']}")
+        if not sheet:
+            print(f"WARNING: Could not fetch sheet {cfg['id']}")
+            continue
         cols = [c["title"] for c in sheet.get("columns", [])]
-        print(f"Sheet columns: {cols}")
         for row in sheet.get("rows", []):
             cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
             if not cells or not cells[0]:
@@ -48,62 +71,27 @@ if ss_token:
             row_dict = dict(zip(cols, cells))
             primary  = str(cells[0])
 
-            # Match to our projects
             matched_key = None
             for map_name, key in PROJECT_MAP.items():
                 if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
                     matched_key = key
                     break
 
-            if matched_key:
-                try:
-                    budget   = float(str(row_dict.get("Budget Hours") or 0).replace(",",""))
-                    incurred = float(str(row_dict.get("Total Incurred Hours") or 0).replace(",",""))
-                    pct_str  = str(row_dict.get("% Hours Used") or "0").replace("%","").strip()
-                    pct      = float(pct_str) if pct_str else round((incurred/budget*100),1) if budget else 0
-                    remaining = round(budget - incurred, 1)
-                    status   = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
-                    color    = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
-                    budget_data[matched_key] = {
-                        "budget": budget, "incurred": incurred, "pct": pct,
-                        "remaining": remaining, "status": status, "color": color, "source": primary,
-                    }
-                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
-                except Exception as e:
-                    print(f"  WARNING: Could not parse row for {primary}: {e}")
-    else:
-        print("WARNING: Could not fetch Mgmnt Project Percent Data sheet")
-
-    # Also check Budget - Hours Data sheet (ID: 6866540340137860)
-    # Columns: Primary, "Budget (hours)", "Incurred (hours)"
-    SHEET_ID2 = "6866540340137860"
-    sheet2 = ss_get(f"sheets/{SHEET_ID2}")
-    if sheet2:
-        cols2 = [c["title"] for c in sheet2.get("columns", [])]
-        for row in sheet2.get("rows", []):
-            cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
-            if not cells or not cells[0]:
-                continue
-            row_dict  = dict(zip(cols2, cells))
-            primary   = str(cells[0])
-            matched_key = None
-            for map_name, key in PROJECT_MAP.items():
-                if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
-                    matched_key = key
-                    break
             if matched_key and matched_key not in budget_data:
                 try:
-                    budget   = float(str(row_dict.get("Budget (hours)") or 0).replace(",",""))
-                    incurred = float(str(row_dict.get("Incurred (hours)") or 0).replace(",",""))
-                    pct      = min(round(incurred/budget*100, 1), 100) if budget else 0
+                    budget   = float(str(row_dict.get(cfg["budget"])   or 0).replace(",",""))
+                    incurred = float(str(row_dict.get(cfg["incurred"]) or 0).replace(",",""))
+                    if not budget:
+                        continue
+                    pct       = min(round(incurred / budget * 100, 1), 100)
                     remaining = round(budget - incurred, 1)
-                    status   = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
-                    color    = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
+                    status    = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
+                    color     = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
                     budget_data[matched_key] = {
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  {matched_key} (Budget-Hours sheet): {incurred}/{budget} hrs ({pct}%)")
+                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status} [{primary}]")
                 except Exception as e:
                     print(f"  WARNING: Could not parse {primary}: {e}")
 
