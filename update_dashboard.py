@@ -74,44 +74,38 @@ if ss_token:
     else:
         print("WARNING: Could not fetch Mgmnt Project Percent Data sheet")
 
-    # Also check Budget - Hours Data sheet for PER PS APP SM Services
+    # Also check Budget - Hours Data sheet (ID: 6866540340137860)
+    # Columns: Primary, "Budget (hours)", "Incurred (hours)"
     SHEET_ID2 = "6866540340137860"
     sheet2 = ss_get(f"sheets/{SHEET_ID2}")
     if sheet2:
         cols2 = [c["title"] for c in sheet2.get("columns", [])]
-        print(f"Budget-Hours sheet columns: {cols2}")
         for row in sheet2.get("rows", []):
             cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
             if not cells or not cells[0]:
                 continue
-            row_dict = dict(zip(cols2, cells))
-            primary  = str(cells[0])
+            row_dict  = dict(zip(cols2, cells))
+            primary   = str(cells[0])
             matched_key = None
             for map_name, key in PROJECT_MAP.items():
                 if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
                     matched_key = key
                     break
             if matched_key and matched_key not in budget_data:
-                # Try to extract budget/incurred from any available columns
-                budget = incurred = None
-                for col, val in row_dict.items():
-                    col_l = col.lower()
-                    if val and ("budget" in col_l) and ("hour" in col_l or "hrs" in col_l):
-                        try: budget = float(str(val).replace(",",""))
-                        except: pass
-                    if val and ("incurred" in col_l or "actual" in col_l):
-                        try: incurred = float(str(val).replace(",",""))
-                        except: pass
-                if budget and incurred is not None:
-                    pct = min(round(incurred/budget*100, 1), 100)
+                try:
+                    budget   = float(str(row_dict.get("Budget (hours)") or 0).replace(",",""))
+                    incurred = float(str(row_dict.get("Incurred (hours)") or 0).replace(",",""))
+                    pct      = min(round(incurred/budget*100, 1), 100) if budget else 0
                     remaining = round(budget - incurred, 1)
-                    status = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
-                    color  = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
+                    status   = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
+                    color    = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
                     budget_data[matched_key] = {
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  {matched_key} (from Budget-Hours sheet): {incurred}/{budget} hrs ({pct}%)")
+                    print(f"  {matched_key} (Budget-Hours sheet): {incurred}/{budget} hrs ({pct}%)")
+                except Exception as e:
+                    print(f"  WARNING: Could not parse {primary}: {e}")
 
 print(f"Budget data found for: {list(budget_data.keys())}")
 
