@@ -33,84 +33,85 @@ def ss_get(path):
 
 if ss_token:
     print("Fetching Smartsheet budget data...")
-    sheets = ss_get("sheets?includeAll=true")
-    if sheets:
-        # Find the budget/hours sheet
-        target_sheet = None
-        priority = ["budget - hours data", "project hours", "budgets - hours", "hours data"]
-        sheet_list = sheets.get("data", [])
-        print(f"Available sheets: {[s['name'] for s in sheet_list]}")
+    # Use Mgmnt Project Percent Data sheet directly (confirmed ID: 6854780065369988)
+    # Columns: Project, Budget Hours, Total Incurred Hours, % Hours Used
+    SHEET_ID = "6854780065369988"
+    sheet = ss_get(f"sheets/{SHEET_ID}")
 
-        for kw in priority:
-            for s in sheet_list:
-                if kw in s["name"].lower():
-                    target_sheet = s
+    if sheet:
+        cols = [c["title"] for c in sheet.get("columns", [])]
+        print(f"Sheet columns: {cols}")
+        for row in sheet.get("rows", []):
+            cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
+            if not cells or not cells[0]:
+                continue
+            row_dict = dict(zip(cols, cells))
+            primary  = str(cells[0])
+
+            # Match to our projects
+            matched_key = None
+            for map_name, key in PROJECT_MAP.items():
+                if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
+                    matched_key = key
                     break
-            if target_sheet:
-                break
 
-        # Fallback: first sheet with "hour" in name
-        if not target_sheet:
-            for s in sheet_list:
-                if "hour" in s["name"].lower():
-                    target_sheet = s
+            if matched_key:
+                try:
+                    budget   = float(str(row_dict.get("Budget Hours") or 0).replace(",",""))
+                    incurred = float(str(row_dict.get("Total Incurred Hours") or 0).replace(",",""))
+                    pct_str  = str(row_dict.get("% Hours Used") or "0").replace("%","").strip()
+                    pct      = float(pct_str) if pct_str else round((incurred/budget*100),1) if budget else 0
+                    remaining = round(budget - incurred, 1)
+                    status   = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
+                    color    = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
+                    budget_data[matched_key] = {
+                        "budget": budget, "incurred": incurred, "pct": pct,
+                        "remaining": remaining, "status": status, "color": color, "source": primary,
+                    }
+                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
+                except Exception as e:
+                    print(f"  WARNING: Could not parse row for {primary}: {e}")
+    else:
+        print("WARNING: Could not fetch Mgmnt Project Percent Data sheet")
+
+    # Also check Budget - Hours Data sheet for PER PS APP SM Services
+    SHEET_ID2 = "6866540340137860"
+    sheet2 = ss_get(f"sheets/{SHEET_ID2}")
+    if sheet2:
+        cols2 = [c["title"] for c in sheet2.get("columns", [])]
+        print(f"Budget-Hours sheet columns: {cols2}")
+        for row in sheet2.get("rows", []):
+            cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
+            if not cells or not cells[0]:
+                continue
+            row_dict = dict(zip(cols2, cells))
+            primary  = str(cells[0])
+            matched_key = None
+            for map_name, key in PROJECT_MAP.items():
+                if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
+                    matched_key = key
                     break
-
-        if target_sheet:
-            print(f"Using sheet: {target_sheet['name']} (ID: {target_sheet['id']})")
-            sheet = ss_get(f"sheets/{target_sheet['id']}")
-
-            if sheet:
-                cols   = [c["title"] for c in sheet.get("columns", [])]
-                print(f"Columns: {cols}")
-
-                for row in sheet.get("rows", []):
-                    cells = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
-                    if not cells:
-                        continue
-                    row_dict = dict(zip(cols, cells))
-                    primary  = str(cells[0] or "")
-
-                    # Match to our projects
-                    matched_key = None
-                    for map_name, key in PROJECT_MAP.items():
-                        if map_name.lower() in primary.lower() or primary.lower() in map_name.lower():
-                            matched_key = key
-                            break
-
-                    if matched_key:
-                        # Find budget and incurred columns
-                        budget   = None
-                        incurred = None
-                        on_budget = True
-                        for col, val in row_dict.items():
-                            col_l = col.lower()
-                            if "budget" in col_l and "hour" in col_l and val:
-                                try: budget = float(str(val).replace(",",""))
-                                except: pass
-                            if "incurred" in col_l and val:
-                                try: incurred = float(str(val).replace(",",""))
-                                except: pass
-                            if "on budget" in col_l and val:
-                                on_budget = str(val).lower() not in ["false","no","0","red"]
-
-                        if budget and incurred is not None:
-                            pct      = min(round((incurred / budget) * 100, 1), 100) if budget else 0
-                            remaining = round(budget - incurred, 1)
-                            status   = "ON BUDGET" if on_budget and pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
-                            color    = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
-                            budget_data[matched_key] = {
-                                "budget":    budget,
-                                "incurred":  incurred,
-                                "pct":       pct,
-                                "remaining": remaining,
-                                "status":    status,
-                                "color":     color,
-                                "source":    primary,
-                            }
-                            print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
-        else:
-            print("WARNING: Could not find budget sheet")
+            if matched_key and matched_key not in budget_data:
+                # Try to extract budget/incurred from any available columns
+                budget = incurred = None
+                for col, val in row_dict.items():
+                    col_l = col.lower()
+                    if val and ("budget" in col_l) and ("hour" in col_l or "hrs" in col_l):
+                        try: budget = float(str(val).replace(",",""))
+                        except: pass
+                    if val and ("incurred" in col_l or "actual" in col_l):
+                        try: incurred = float(str(val).replace(",",""))
+                        except: pass
+                if budget and incurred is not None:
+                    pct = min(round(incurred/budget*100, 1), 100)
+                    remaining = round(budget - incurred, 1)
+                    status = "ON BUDGET" if pct < 90 else ("AT RISK" if pct < 100 else "OVER BUDGET")
+                    color  = "#16a34a" if status == "ON BUDGET" else ("#d97706" if status == "AT RISK" else "#dc2626")
+                    budget_data[matched_key] = {
+                        "budget": budget, "incurred": incurred, "pct": pct,
+                        "remaining": remaining, "status": status, "color": color, "source": primary,
+                    }
+                    print(f"  {matched_key} (from Budget-Hours sheet): {incurred}/{budget} hrs ({pct}%)")
 
 print(f"Budget data found for: {list(budget_data.keys())}")
 
