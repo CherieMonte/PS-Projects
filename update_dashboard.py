@@ -36,29 +36,44 @@ def ss_get(path):
 if ss_token:
     print("Fetching Smartsheet budget data...")
 
-    # Hours Forecasting sheet (ID: 176228980969348)
-    # Primary column: "Projects" | Budget: "Budget (Hours)" | Incurred: "Incurred (Hours)"
-    # PROJECT_MAP keys must exactly match values in the "Projects" column
-    sheet = ss_get("sheets/176228980969348")
+    # Two sheets, each with their own column names
+    # Sheet 1: Hours Forecasting (176228980969348)
+    #   primary col: "Projects", budget: "Budget (Hours)", incurred: "Incurred (Hours)"
+    # Sheet 2: Mgmnt Project Percent Data (6854780065369988)
+    #   primary col: "Project", budget: "Budget Hours", incurred: "Total Incurred Hours"
 
-    if sheet:
+    SHEETS = [
+        ("176228980969348", "Projects",  "Budget (Hours)",    "Incurred (Hours)"),
+        ("6854780065369988", "Project",  "Budget Hours",      "Total Incurred Hours"),
+    ]
+
+    for sheet_id, primary_col, budget_col, incurred_col in SHEETS:
+        sheet = ss_get(f"sheets/{sheet_id}")
+        if not sheet:
+            continue
         cols = [c["title"] for c in sheet.get("columns", [])]
         for row in sheet.get("rows", []):
             cells    = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
             if not cells:
                 continue
             row_dict = dict(zip(cols, cells))
-            primary  = str(row_dict.get("Projects") or "").strip()
+            primary  = str(row_dict.get(primary_col) or "").strip()
             if not primary:
                 continue
 
-            # Exact match only — prevents partial name collisions between projects
+            # Exact match
             matched_key = PROJECT_MAP.get(primary)
+            if not matched_key:
+                # Try case-insensitive exact match
+                for map_name, key in PROJECT_MAP.items():
+                    if primary.lower() == map_name.lower():
+                        matched_key = key
+                        break
 
             if matched_key and matched_key not in budget_data:
                 try:
-                    budget   = float(str(row_dict.get("Budget (Hours)") or 0).replace(",",""))
-                    incurred = float(str(row_dict.get("Incurred (Hours)") or 0).replace(",",""))
+                    budget   = float(str(row_dict.get(budget_col)   or 0).replace(",",""))
+                    incurred = float(str(row_dict.get(incurred_col) or 0).replace(",",""))
                     if not budget:
                         continue
                     pct       = min(round(incurred / budget * 100, 1), 100)
@@ -69,11 +84,9 @@ if ss_token:
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
+                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status} [{primary}]")
                 except Exception as e:
                     print(f"  WARNING: Could not parse {primary}: {e}")
-    else:
-        print("WARNING: Could not fetch Hours Forecasting sheet")
 
 print(f"Budget data found for: {list(budget_data.keys())}")
 
