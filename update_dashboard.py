@@ -262,32 +262,41 @@ html = re.sub(
 )
 
 # ── Add budget bars to Cherie's cards ─────────────────────────────
-# Use unique anchor strings present in each card header to find insertion point
-CHERIE_ANCHORS = {
-    'genesys': '% Complete:</strong> TBD',
-    'oidc':    'Dec 15, 2025 - August 31, 2026',
+# Insert budget bar just before the exec-quote div in each card
+# Using unique strings from each card's exec-quote as the insertion anchor
+CHERIE_EXEC_QUOTES = {
+    'genesys': 'Status as of 7/13/26',
+    'oidc':    'Customer engagement is a growing concern',
 }
-for key, anchor in CHERIE_ANCHORS.items():
+for key, quote_anchor in CHERIE_EXEC_QUOTES.items():
     bar = budget_bar_html(key)
-    if bar and anchor in html:
-        # Find the anchor, then find the closing </div> of card-subtitle after it
-        anchor_pos = html.find(anchor)
-        # Find the end of the card-subtitle div after this anchor
-        close_pos = html.find('</div>', anchor_pos)
-        if close_pos > -1:
-            # Insert budget bar right after the subtitle closing div
-            insert_at = close_pos + len('</div>')
-            # Only insert if budget bar not already there
-            if 'budget-bar-wrap' not in html[insert_at:insert_at+200]:
-                html = html[:insert_at] + bar + html[insert_at:]
-                print(f'Budget bar inserted for {key}')
-            else:
-                # Update existing budget bar
-                bar_start = html.find('<div class="budget-bar-wrap">', insert_at)
-                bar_end   = html.find('</div>\n      </div>\n      <div class="card-body">', bar_start)
-                if bar_start > -1 and bar_end > -1:
-                    html = html[:bar_start] + bar.strip() + html[bar_end:]
-                    print(f'Budget bar updated for {key}')
+    if not bar:
+        print(f'No budget data for {key} — skipping')
+        continue
+    pos = html.find(quote_anchor)
+    if pos == -1:
+        print(f'Could not find exec-quote anchor for {key}')
+        continue
+    # Walk back to find the opening of the exec-quote div
+    div_start = html.rfind('<div class="exec-quote">', 0, pos)
+    if div_start == -1:
+        print(f'Could not find exec-quote div start for {key}')
+        continue
+    # Check if budget bar already exists just before this div
+    preceding = html[div_start-300:div_start]
+    if 'budget-bar-wrap' in preceding:
+        # Replace existing budget bar
+        bar_start = preceding.rfind('<div class="budget-bar-wrap">')
+        abs_bar_start = div_start - 300 + bar_start
+        bar_end = html.find('</div>', abs_bar_start + 100)
+        # Find full closing of budget-bar-wrap
+        bar_end = html.find('</div>', bar_end + 1) + len('</div>')
+        html = html[:abs_bar_start] + bar.strip() + '\n      ' + html[bar_end:]
+        print(f'Budget bar updated for {key}')
+    else:
+        # Insert budget bar right before exec-quote div
+        html = html[:div_start] + bar + '\n        ' + html[div_start:]
+        print(f'Budget bar inserted for {key}')
 
 # ── Replace Jonny's cards ──────────────────────────────────────────
 if jonny_html:
