@@ -262,13 +262,32 @@ html = re.sub(
 )
 
 # ── Add budget bars to Cherie's cards ─────────────────────────────
-for key, card_id in [('genesys', 'Genesys Deprecation'), ('oidc', 'OIDC Customer Migration')]:
+# Use unique anchor strings present in each card header to find insertion point
+CHERIE_ANCHORS = {
+    'genesys': '% Complete:</strong> TBD',
+    'oidc':    'Dec 15, 2025 - August 31, 2026',
+}
+for key, anchor in CHERIE_ANCHORS.items():
     bar = budget_bar_html(key)
-    if bar and card_id in html:
-        # Insert before closing card-header div for each card
-        # Find the card and insert budget bar before </div> that closes card-header
-        pattern = rf'(card-title">[^<]*{re.escape(card_id)}.*?exec-detail">[^<]*</div>)'
-        html = re.sub(pattern, lambda m: m.group(0) + bar, html, flags=re.DOTALL, count=1)
+    if bar and anchor in html:
+        # Find the anchor, then find the closing </div> of card-subtitle after it
+        anchor_pos = html.find(anchor)
+        # Find the end of the card-subtitle div after this anchor
+        close_pos = html.find('</div>', anchor_pos)
+        if close_pos > -1:
+            # Insert budget bar right after the subtitle closing div
+            insert_at = close_pos + len('</div>')
+            # Only insert if budget bar not already there
+            if 'budget-bar-wrap' not in html[insert_at:insert_at+200]:
+                html = html[:insert_at] + bar + html[insert_at:]
+                print(f'Budget bar inserted for {key}')
+            else:
+                # Update existing budget bar
+                bar_start = html.find('<div class="budget-bar-wrap">', insert_at)
+                bar_end   = html.find('</div>\n      </div>\n      <div class="card-body">', bar_start)
+                if bar_start > -1 and bar_end > -1:
+                    html = html[:bar_start] + bar.strip() + html[bar_end:]
+                    print(f'Budget bar updated for {key}')
 
 # ── Replace Jonny's cards ──────────────────────────────────────────
 if jonny_html:
