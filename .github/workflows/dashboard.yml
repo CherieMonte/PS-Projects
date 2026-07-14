@@ -18,6 +18,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Diagnose Smartsheet
+        env:
+          SMARTSHEET_TOKEN: ${{ secrets.SMARTSHEET_TOKEN }}
+        run: python3 diagnose_smartsheet.py
+
       - name: Build updated dashboard
         env:
           JONNY_TOKEN: ${{ secrets.JONNY_TOKEN }}
