@@ -37,31 +37,28 @@ if ss_token:
     print("Fetching Smartsheet budget data...")
 
     # Hours Forecasting sheet (ID: 176228980969348)
-    # Columns: Numbers, Projects, Budget (Hours), Incurred (Hours)
-    # We match on the "Projects" column using exact project names
-    HOURS_SHEET_ID = "176228980969348"
-    sheet = ss_get(f"sheets/{HOURS_SHEET_ID}")
+    # Primary column: "Projects" | Budget: "Budget (Hours)" | Incurred: "Incurred (Hours)"
+    # PROJECT_MAP keys must exactly match values in the "Projects" column
+    sheet = ss_get("sheets/176228980969348")
 
     if sheet:
         cols = [c["title"] for c in sheet.get("columns", [])]
-        print(f"Columns found: {cols}")
         for row in sheet.get("rows", []):
             cells    = [c.get("displayValue") or c.get("value") for c in row.get("cells", [])]
+            if not cells:
+                continue
             row_dict = dict(zip(cols, cells))
-            # Primary column might be "Projects" or "Numbers" — check both
-            primary  = str(row_dict.get("Projects") or row_dict.get("Primary") or cells[0] if cells else "")
-            print(f"  Row: {primary[:60]}")
+            primary  = str(row_dict.get("Projects") or "").strip()
+            if not primary:
+                continue
 
-            matched_key = None
-            for map_name, key in PROJECT_MAP.items():
-                if primary.strip().lower() == map_name.strip().lower():
-                    matched_key = key
-                    break
+            # Exact match only — prevents partial name collisions between projects
+            matched_key = PROJECT_MAP.get(primary)
 
             if matched_key and matched_key not in budget_data:
                 try:
-                    budget   = float(str(row_dict.get("Budget (Hours)") or row_dict.get("Budget Hours") or 0).replace(",",""))
-                    incurred = float(str(row_dict.get("Incurred (Hours)") or row_dict.get("Total Incurred Hours") or 0).replace(",",""))
+                    budget   = float(str(row_dict.get("Budget (Hours)") or 0).replace(",",""))
+                    incurred = float(str(row_dict.get("Incurred (Hours)") or 0).replace(",",""))
                     if not budget:
                         continue
                     pct       = min(round(incurred / budget * 100, 1), 100)
@@ -72,7 +69,7 @@ if ss_token:
                         "budget": budget, "incurred": incurred, "pct": pct,
                         "remaining": remaining, "status": status, "color": color, "source": primary,
                     }
-                    print(f"  MATCHED {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
+                    print(f"  {matched_key}: {incurred}/{budget} hrs ({pct}%) — {status}")
                 except Exception as e:
                     print(f"  WARNING: Could not parse {primary}: {e}")
     else:
