@@ -179,7 +179,7 @@
     <div class="header-badge">✦ AI-Analyzed · Fathom Meeting Notes</div>
   </div>
   <div class="header-right">
-    <strong>2026-07-13</strong>
+    <strong>2026-07-14</strong>
     Source: Fathom standup &amp; review recordings<br>
     6 active projects · 6 at risk · 0 on track
   </div>
@@ -256,7 +256,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">118 / 600 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:19.7%;background:#16a34a"></div></div><div class="budget-sub">482 hrs remaining &nbsp;·&nbsp; 19.7% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div>
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">118 / 600 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:19.6%;background:#16a34a"></div></div><div class="budget-sub">482 hrs remaining &nbsp;·&nbsp; 19.6% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div><div class="budget-track"><div class="budget-fill" style="width:19.7%;background:#16a34a"></div></div><div class="budget-sub">482 hrs remaining &nbsp;·&nbsp; 19.7% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div>
         <div class="milestone-wrap">
           <span class="milestone-date">July 2, 2026</span>
           <span class="milestone-badge">· Next:</span>
@@ -302,7 +302,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">306 / 480 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:63.6%;background:#16a34a"></div></div><div class="budget-sub">174 hrs remaining &nbsp;·&nbsp; 63.6% of budget consumed &nbsp;·&nbsp; Source: PER Lightning Bolt DevIQ 2026</div></div>
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">306 / 480 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:63.6%;background:#16a34a"></div></div><div class="budget-sub">174 hrs remaining &nbsp;·&nbsp; 63.6% of budget consumed &nbsp;·&nbsp; Source: PER Lightning Bolt DevIQ 2026</div></div><div class="budget-track"><div class="budget-fill" style="width:63.6%;background:#16a34a"></div></div><div class="budget-sub">174 hrs remaining &nbsp;·&nbsp; 63.6% of budget consumed &nbsp;·&nbsp; Source: PER Lightning Bolt DevIQ 2026</div></div>
         <div class="milestone-wrap">
           <span class="milestone-date">July 9, 2026</span>
           <span class="milestone-badge">· Next:</span>
@@ -330,30 +330,31 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🏗️ Atlanta AWS Migration</div>
+            <div class="card-title">🏗️ &#x1F3D7;&#xFE0F; Atlanta AWS Migration</div>
             <div class="card-subtitle"><strong>Goal:</strong> Migrate PS Atlanta on-prem to AWS<br><strong>Timeline:</strong> Dec 2025 - August 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">Aug 5 wave-1 cutover is holding, but a blocked V4 import and an unresolved load-testing gap keep schedule pressure on the critical path.</div>
-        <div class="exec-detail">QA testing is unblocked &#x2014; staging databases were rebuilt, a new RabbitMQ cluster in QA is standing up, and QA traffic now routes to Atlanta, enabling granular app-flip testing for Groups 1 and 2. The team has taken over QA for the Aug 5 deadline, mirroring production phase-by-phase with soak time between waves. Esteban&#x2019;s DNS-flip migration runbook is due for review Thursday, and a load-testing plan (likely K6, informed by Pendo hotspot data) will be scoped with James and Tony this week.</div>
+        <div class="exec-quote">V4 migration remains the primary blocker and the stalled Workspaces POC threatens the September user migration, keeping pressure on the Aug 5 wave-1 launch.</div>
+        <div class="exec-detail">All remaining production tasks are now tagged to a phased deployment plan (Aug 5, Sep 2, Nov 4, Dec 2), and the board is being reorganized into date-based epics to sharpen focus on the critical August 5th launch. A QA-leads-production strategy will migrate each wave in QA first and let it bake for weeks before cutover, providing a safety net for validating the new ALB. V4 migration remains the primary blocker, and Jon is escalating the long-stalled Workspaces POC with Tim as a critical-path item for the September user migration.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Joe&#x2019;s V4 import blocked pending security group and EC2 workspace setup; David&#x2019;s related PR needs review</span></div><div class="item"><span class="item-icon">⚠️</span><span>Load-testing gap: Pendo tracks clicks, not load &#x2014; a K6-style plan must be scoped with James and Tony before cutover confidence</span></div><div class="item"><span class="item-icon">⚠️</span><span>James remains a single-threaded dependency for app configuration, with QA capacity concentrated in Betsy</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>V4 migration stalled &#x2014; importing V3 state into the DR site without live changes forces a slow, deliberate approach, holding up production-side tasks</span></div><div class="item"><span class="item-icon">⚠️</span><span>Workspaces POC must land by Aug 5 at the latest or the September Citrix user migration and CX training slip; escalation with Tim in motion</span></div><div class="item"><span class="item-icon">⚠️</span><span>Load-testing gap &#x2014; Pendo tracks clicks, not load; new K6 stories (James leading) must stand up before cutover confidence</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>QA testing unblocked: staging DBs rebuilt, a new RabbitMQ cluster in QA, and QA traffic rerouted to ATL</span></div><div class="item"><span class="item-icon">✅</span><span>QA strategy approved: team-run QA mirrors prod with phased soak time per wave; QA DNS unified to Atlanta QA</span></div><div class="item"><span class="item-icon">✅</span><span>DNS-flip runbook scripting on track &#x2014; code due for review Thursday</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Phased deployment plan locked &#x2014; every remaining prod task tagged to an Aug 5 / Sep 2 / Nov 4 / Dec 2 bucket</span></div><div class="item"><span class="item-icon">✅</span><span>QA testing unblocked: staging DBs rebuilt, a new RabbitMQ cluster in QA, and QA traffic routed to ATL</span></div><div class="item"><span class="item-icon">✅</span><span>LucidPoint continuing post-August on remaining contract hours, letting full DR shift later without risking Aug 5</span></div></div>
         </div>
       </div>
       <div class="card-footer">
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">2,226 / 3,379 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:65.9%;background:#16a34a"></div></div><div class="budget-sub">1,153 hrs remaining &nbsp;·&nbsp; 65.9% of budget consumed &nbsp;·&nbsp; Source: PER Atlanta DC Mobilization</div></div>
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Aug 5 wave-1 production cutover — DNS-flip runbook review Thu Jul 16</span>
+          <span class="milestone-text">🏁 Aug 5 Phase 1 production launch — Workspaces POC due same day</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/739636433" class="source-link" target="_blank">📋 Stand-up Jul 9</a><a href="https://fathom.video/calls/737286290" class="source-link" target="_blank">📋 Stand-up Jul 8</a><a href="https://fathom.video/calls/738535380" class="source-link" target="_blank">📋 Cutover Breakout Jul 8</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/742124121" class="source-link" target="_blank">📋 Stand-up Jul 13</a><a href="https://fathom.video/calls/745055129" class="source-link" target="_blank">📋 Phased Review w/ Tony Jul 13</a><a href="https://fathom.video/calls/739636433" class="source-link" target="_blank">📋 Stand-up Jul 9</a></div>
       </div>
     </div>
 
@@ -361,12 +362,12 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🇨🇦 Canada AWS Platform</div>
+            <div class="card-title">🇨🇦 &#x1F1E8;&#x1F1E6; Canada AWS Platform</div>
             <div class="card-subtitle"><strong>Goal:</strong> Spin up new Telmediq environment in the Canada region<br><strong>Timeline:</strong> April 22, 2026 - August 19, 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">The provisioned EKS cluster is not operational and an ArgoCD expertise gap makes the July 15 Helm chart milestone unrealistic.</div>
+        <div class="exec-quote">The provisioned EKS cluster is not operational and the ArgoCD expertise gap makes the July 15 Helm chart milestone unrealistic.</div>
         <div class="exec-detail">The Canadian EKS cluster is provisioned but unusable &#x2014; ArgoCD reports its connection status as unknown &#x2014; blocking application deployment and end-to-end testing. With no internal ArgoCD expert after Vinny&#x2019;s departure, Jason is searching internally and Scott will source externally if needed. Adam&#x2019;s team is proceeding with Helm chart configuration independent of cluster status, and scope decisions such as the PG Bouncer EC2 MVP continue to protect the Aug 19 finish.</div>
       </div>
       <div class="card-body">
@@ -380,6 +381,7 @@
         </div>
       </div>
       <div class="card-footer">
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">530 / 2,210 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:24.0%;background:#16a34a"></div></div><div class="budget-sub">1,680 hrs remaining &nbsp;·&nbsp; 24.0% of budget consumed &nbsp;·&nbsp; Source: PER Canadian CC Platform</div></div>
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
           <span class="milestone-text">🏁 ArgoCD expert onboarded → EKS cluster operational for Helm deployment</span>
@@ -392,18 +394,18 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🌐 OC West Expansion</div>
+            <div class="card-title">🌐 &#x1F310; OC West Expansion</div>
             <div class="card-subtitle"><strong>Goal:</strong> Test Latency of Aurora Global for the OC West expansion.<br><strong>Timeline:</strong> June 22, 2026 - July 3, 2026.</div>
           </div>
           <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">DMS full load executing with no open blockers; the CNAME flip is gated only by large-table retries completing and replication lag holding under 5 seconds.</div>
-        <div class="exec-detail">The DMS full load kicked off the night of July 8 and reached roughly 100% by July 9; a handful of large, JSON-heavy tables (2&#x2013;3M rows, 1GB+) failed and are being manually retried &#x2014; a known DMS limitation &#x2014; with progress monitored in CloudWatch and resolution targeted over the weekend. A dashboard tracks replication lag against the 5-second go/no-go threshold gating the CNAME flip to Aurora, after which a US-West-2 instance will be provisioned via Terraform for the remaining deliverable: the final East-vs-West latency assessment informing the customer&#x2019;s contract-vs-ROI decision. Full expansion is estimated for the end of next week.</div>
+        <div class="exec-quote">DMS full load is executing with no open blockers &#x2014; all approvals landed; the CNAME flip is gated only on final table syncs and replication lag holding under 5 seconds.</div>
+        <div class="exec-detail">The DMS full load kicked off the night of July 8 and reached roughly 100% by July 9; a handful of large, JSON-heavy tables (2&#x2013;3M rows, 1GB+) required manual retries &#x2014; a known DMS limitation &#x2014; with progress monitored in CloudWatch. A dashboard tracks replication lag against the 5-second go/no-go threshold gating the CNAME flip to Aurora, after which a US-West-2 instance will be provisioned via Terraform for the remaining deliverable: the final East-vs-West latency assessment informing the customer&#x2019;s contract-vs-ROI decision. Full expansion is estimated for the end of this week.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Watch item: large-table load failures require manual retries and could stretch the load window through the weekend</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: replication lag must hold consistently below 5 seconds before the CNAME flip can proceed</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: single-resource dependency on Lamine; Mark can source AWS DMS SMEs if a major blocker arises</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Watch item: large-table load failures require manual retries and could stretch the load window</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: replication lag must hold consistently below 5 seconds before the CNAME flip can proceed</span></div><div class="item"><span class="item-icon">⚠️</span><span>Watch item: single-resource dependency on Lamine; Mark can source AWS DMS SMEs if a major blocker arises</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
@@ -411,6 +413,7 @@
         </div>
       </div>
       <div class="card-footer">
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">22 / 118 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:18.6%;background:#16a34a"></div></div><div class="budget-sub">96 hrs remaining &nbsp;·&nbsp; 18.6% of budget consumed &nbsp;·&nbsp; Source: PER OC Multi-Region Active POC</div></div>
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
           <span class="milestone-text">🏁 CNAME flip to Aurora once tables sync &amp; lag &lt; 5s — East-vs-West latency assessment to follow</span>
@@ -423,18 +426,18 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🛑 IDP</div>
+            <div class="card-title">🛑 &#x1F510; IDP</div>
             <div class="card-subtitle"><strong>Goal:</strong> Upgrade the IDP to Duende and vNext<br><strong>Timeline:</strong> Dec 1, 2025 - Nov 4, 2026.</div>
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
         <div class="exec-quote">The upgrade path is on track for the July 15 release challenge, but CC/OC work omitted from the Q3 PI plan leaves capacity and timeline unresolved.</div>
-        <div class="exec-detail">The upgrade project is on track for its July 15 release challenge, clearing the path to QA regression and a production release within roughly two weeks; Brian unblocked the OCCC team by configuring the upgrade environment for their Phase 3 spike. CC and OC work was omitted from the Q3 PI plan, so a trade-off discussion is needed &#x2014; the team will run spikes first to define the technical work, with findings driving the Q3 scheduling decision. Brian Noyes is updating hybrid SCIM design diagrams and story details, helping Adan scope the CC/OC spike, and deploying Identity vNext to an environment within 2&#x2013;3 weeks for introspection testing. Lightning Bolt go-live moved to mid-August as a scheduling buffer; the June 17 Lightning Bolt release failure has a completed RCA with correction items identified for the next window.</div>
+        <div class="exec-detail">The upgrade project is on track for its July 15 release challenge, clearing the path to QA regression and a production release within roughly two weeks; Brian unblocked the OCCC team by configuring the upgrade environment for their Phase 3 spike. CC and OC work was omitted from the Q3 PI plan, so a trade-off discussion is needed &#x2014; the team will run spikes first to define the technical work, with findings driving the Q3 scheduling decision. Brian Noyes is updating hybrid SCIM design diagrams and story details, helping Adan define the CC/OC spike scope, and deploying Identity vNext to an environment within 2&#x2013;3 weeks to enable introspection testing. Lightning Bolt go-live moved to mid-August as a scheduling buffer; the June 17 Lightning Bolt release failure has a completed RCA with correction items identified for the next release window.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>CC/OC work omitted from the Q3 PI plan &#x2014; capacity reallocation and timeline unresolved pending spike findings</span></div><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development; root cause possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy remains a single-point QA bottleneck across concurrent AWS, TLS, and IDP testing</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>CC/OC work omitted from the Q3 PI plan &#x2014; capacity reallocation and timeline unresolved pending spike findings</span></div><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure blocking development; root cause possibly tied to the Dev AWS migration</span></div><div class="item"><span class="item-icon">⚠️</span><span>Betsy remains a single-point QA bottleneck; Lightning Bolt deployment still gated by the client&#x2019;s maintenance-window availability</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
@@ -442,18 +445,19 @@
         </div>
       </div>
       <div class="card-footer">
+        <div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-14</span><span class="budget-used">152 / 260 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:58.5%;background:#16a34a"></div></div><div class="budget-sub">108 hrs remaining &nbsp;·&nbsp; 58.5% of budget consumed &nbsp;·&nbsp; Source: PER Solliance Identity Server Rollout</div></div>
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
           <span class="milestone-text">🏁 Jul 15 upgrade release challenge → QA regression → prod within ~2 weeks</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/737286259" class="source-link" target="_blank">📋 IDP Sync Jul 8</a><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/724029421" class="source-link" target="_blank">📋 Scrum of Scrums Jun 26</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/737286259" class="source-link" target="_blank">📋 IDP Sync Jul 8</a><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 IDP Sync Jun 24</a></div>
       </div>
     </div>
   </div><!-- /card-grid -->
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
-    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 13, 2026</span>
+    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 14, 2026</span>
   </footer>
 
 </main>
