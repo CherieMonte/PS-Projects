@@ -2,7 +2,7 @@ name: Daily Dashboard Update
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # 10:00 AM MT = 16:00 UTC
+    - cron: '45 12 * * *'  # 6:45 AM MDT = 12:45 UTC
   workflow_dispatch:
 
 permissions:
