@@ -190,7 +190,7 @@
     <div class="header-badge">✦ AI-Analyzed · Fathom Meeting Notes</div>
   </div>
   <div class="header-right">
-    <strong>2026-07-21</strong>
+    <strong>2026-07-22</strong>
     Source: Fathom standup &amp; review recordings<br>
     6 active projects · 6 at risk · 0 on track
   </div>
@@ -266,7 +266,7 @@
           </div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_GENESYS_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">137 / 600 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:22.8%;background:#16a34a"></div></div><div class="budget-sub">463 hrs remaining &nbsp;·&nbsp; 22.8% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div><!-- BUDGET_BAR_GENESYS_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_GENESYS_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-22</span><span class="budget-used">126 / 600 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:21.1%;background:#16a34a"></div></div><div class="budget-sub">474 hrs remaining &nbsp;·&nbsp; 21.1% of budget consumed &nbsp;·&nbsp; Source: PER PS APP SM Services</div></div><!-- BUDGET_BAR_GENESYS_END -->
         <div class="milestone-wrap">
           <span class="milestone-date">July 2, 2026</span>
           <span class="milestone-badge">· Next:</span>
@@ -311,7 +311,7 @@
           </div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_OIDC_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">326 / 480 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:67.8%;background:#16a34a"></div></div><div class="budget-sub">154 hrs remaining &nbsp;·&nbsp; 67.8% of budget consumed &nbsp;·&nbsp; Source: PER Lightning Bolt DevIQ 2026</div></div><!-- BUDGET_BAR_OIDC_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_OIDC_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-22</span><span class="budget-used">355 / 480 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:74.0%;background:#16a34a"></div></div><div class="budget-sub">125 hrs remaining &nbsp;·&nbsp; 74.0% of budget consumed &nbsp;·&nbsp; Source: PER Lightning Bolt DevIQ 2026</div></div><!-- BUDGET_BAR_OIDC_END -->
         <div class="milestone-wrap">
           <span class="milestone-date">July 9, 2026</span>
           <span class="milestone-badge">· Next:</span>
@@ -344,25 +344,25 @@
           </div>
           <span class="rag-pill rag-yellow"><span class="dot"></span> At Risk</span>
         </div>
-        <div class="exec-quote">Aug 5 remains firm and initial QA validation is complete, but the active-passive ALB patching strategy is still an undefined hard prerequisite &#x2014; only a spike exists so far &#x2014; keeping schedule pressure on Wave 1.</div>
-        <div class="exec-detail">Initial QA validation is complete: James Freeman&#x2019;s findings show 90% of traffic at comparable P90 latency, with the remaining 10% slower and its user-experience impact still unknown, and the &#x201C;Test and Validate&#x201D; story is closed after the Attachment API fix was confirmed. Internal and external web-server PRs are ready but held for two changes &#x2014; removing the problematic Agile Blue agent and adding New Relic for post-migration visibility &#x2014; which the team confirmed do not affect the Aug 5 timeline. The open question is the active-passive ALB: there is no defined patching process for the new environment, deregistering nodes via SSM is the leading candidate, and Esteban is creating a spike ticket to formalize and test it.</div>
+        <div class="exec-quote">Aug 5 is still the plan, but a Jul 23 EFS certificate expiry in dev and the undefined active-passive ALB patching strategy keep Wave 1 under pressure &#x2014; the team will re-evaluate the date next week.</div>
+        <div class="exec-detail">The Jul 21 stand-up held Aug 5 as the target while flagging two live issues. The dev environment will fail on Jul 23 when its EFS certificates expire &#x2014; web-server certificate renewal jobs are hanging and blocking all related work, which matters more now that the environment carries live traffic; David is investigating, and a newly tested ALB certificate rated an &#x201C;A&#x201D;, confirming the fault is specific to the web-server renewal path. The main scheduling unknown is how long isolated testing takes, since it requires blocking traffic between AWS and Atlanta. To keep the date, Workspaces has been moved out to the Sept 2 phase and web-server deployments were unblocked with a temporary 10.0.0.0/8 security group, with tightened rules to be tested in Dev/QA first.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Active-passive ALB patching strategy is a hard prerequisite for Aug 5 with no solution defined &#x2014; weight-based routing ruled out without auto-scaling; SSM-driven node deregistration is the leading candidate pending Esteban&#x2019;s spike</span></div><div class="item"><span class="item-icon">⚠️</span><span>Web-server PRs held pending removal of the Agile Blue agent and the New Relic addition (David Schroeder) &#x2014; team confirmed no Aug 5 timeline impact</span></div><div class="item"><span class="item-icon">⚠️</span><span>AWS Workspaces POC still blocked &#x2014; Tony and Esteban could not connect, and Okta-to-Dev user mapping remains unresolved; Jon is following up with Tim</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Dev environment EFS certificates expire Jul 23 and web-server renewal jobs are hanging &#x2014; all related work is blocked; David is investigating, and the environment now carries live traffic</span></div><div class="item"><span class="item-icon">⚠️</span><span>Active-passive ALB patching strategy remains an undefined hard prerequisite for Aug 5 &#x2014; weight-based routing is ruled out without auto-scaling; SSM-driven node deregistration leads, pending Esteban&#x2019;s spike</span></div><div class="item"><span class="item-icon">⚠️</span><span>Isolated testing requires blocking traffic between AWS and Atlanta and its duration is unknown &#x2014; the primary variable in next week&#x2019;s Aug 5 re-evaluation</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Initial QA validation complete &#x2014; 90% of traffic shows comparable P90 latency; the Test and Validate story is closed after the Attachment API fix was confirmed</span></div><div class="item"><span class="item-icon">✅</span><span>Staging FSx NetApp approved at $226/mo to complete the staging environment, with David Schroeder building it and Joseph Maloney raising the story</span></div><div class="item"><span class="item-icon">✅</span><span>K6 load testing ownership moved to James Freeman and the CRCD server-list population is being scripted</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>QA validation complete &#x2014; 90% of traffic shows comparable P90 latency and the Test and Validate story closed after the Attachment API fix was confirmed</span></div><div class="item"><span class="item-icon">✅</span><span>Security-group blocker cleared with a temporary 10.0.0.0/8 group; Camacho owns the spike to define final rules, to be tested in Dev/QA before production</span></div><div class="item"><span class="item-icon">✅</span><span>Scope focused on Wave 1 &#x2014; Workspaces moved to the Sept 2 phase and the staging FSx NetApp approved at $226/mo with David Schroeder building it</span></div></div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_ATLANTA_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">2,305 / 3,379 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:68.2%;background:#16a34a"></div></div><div class="budget-sub">1,074 hrs remaining &nbsp;·&nbsp; 68.2% of budget consumed &nbsp;·&nbsp; Source: PER Atlanta DC Mobilization</div></div><!-- BUDGET_BAR_ATLANTA_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_ATLANTA_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-22</span><span class="budget-used">2,307 / 3,379 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:68.3%;background:#16a34a"></div></div><div class="budget-sub">1,072 hrs remaining &nbsp;·&nbsp; 68.3% of budget consumed &nbsp;·&nbsp; Source: PER Atlanta DC Mobilization</div></div><!-- BUDGET_BAR_ATLANTA_END -->
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Aug 5 Wave 1 go-live — close the active-passive ALB spike, then release the held web-server PRs</span>
+          <span class="milestone-text">🏁 Aug 5 Wave 1 go-live — clear the EFS certificate renewal before Jul 23, then confirm the date at next weeks re-evaluation</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/754005852" class="source-link" target="_blank">📋 Stand-up Jul 20</a><a href="https://fathom.video/calls/747635808" class="source-link" target="_blank">📋 Stand-up Jul 16</a><a href="https://fathom.video/calls/746285835" class="source-link" target="_blank">📋 Stand-up Jul 15</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/754005890" class="source-link" target="_blank">📋 Stand-up Jul 21</a><a href="https://fathom.video/calls/754005852" class="source-link" target="_blank">📋 Stand-up Jul 20</a><a href="https://fathom.video/calls/747635808" class="source-link" target="_blank">📋 Stand-up Jul 16</a></div>
       </div>
     </div>
 
@@ -375,25 +375,25 @@
           </div>
           <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">PM override Jul 17 holds &#x2014; ArgoCD is running on the new EKS cluster and the open items (Argo access, shared-DB upsizing, Canadian Twilio) are tracked risks that do not substantially threaten the Aug 19 delivery date.</div>
-        <div class="exec-detail">No new meeting data has landed since the July 16 check-in, so the picture is unchanged: Dave and David have submitted corrected Okta tickets for the new prod.argo instance with Tony expediting, which will let LucidPoint validate the new EKS cluster&#x2019;s health. Data plane work continues to move &#x2014; Russell&#x2019;s S3 PR and dynamic ARN refactor, Brandon unblocked on Looker, and Rhapsody connectivity to Canada established. The shared database, sized to the smaller of the two it consolidates, needs an upsize Tony has confirmed is straightforward, and the Canadian Twilio instance remains a hard early-September requirement before any customer onboarding.</div>
+        <div class="exec-quote">The Argo CD access blocker cleared on Jul 21 and the team confirmed the mid-August application deploy does not disturb the Aug 19 handoff &#x2014; Dave&#x2019;s absence and the Twilio deadline are tracked risks, not date threats.</div>
+        <div class="exec-detail">Dave and David now have access to the new EKS cluster and Argo CD, closing the roughly 1.5-week-old IT ticket that had prevented the team from validating environment health. The application team is targeting a mid-August deploy using a single late-stage deployment pattern the team described as tried and true, and Adam confirmed this is not expected to delay the Aug 19 service handoff. Data-plane work continues to move &#x2014; the PG Bouncer workspace is set up and the EC2 instance is next, a dedicated Redis PR is awaiting Jon&#x2019;s review, and Dave is consolidating duplicate S3 tickets with Russell. New observability tasks were assigned this week: a CloudTrail data-ownership spike for Tony, observability migration and deploy tasks for David, and New Relic key creation for Megan.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Argo CD access to the new prod.argo instance still outstanding &#x2014; corrected Okta tickets are with Tony to expedite; cluster health cannot be validated until granted</span></div><div class="item"><span class="item-icon">⚠️</span><span>Shared database was sized to the smaller of its two source DBs &#x2014; must be upsized to avoid performance issues under combined load (Tony confirms an easy resize)</span></div><div class="item"><span class="item-icon">⚠️</span><span>Canadian Twilio instance is a hard early-September deadline &#x2014; the US instance covers testing only, not production customer onboarding</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Dave is out roughly 1.5 weeks from Thursday and is the single-threaded expert on key infrastructure work &#x2014; Russell takes what he can, David Schroeder backs up with limited capacity, and Lamine is a fallback</span></div><div class="item"><span class="item-icon">⚠️</span><span>Canadian CloudTrail data-sovereignty migration requires disabling the US org trail and hand-creating trails on ~12 US accounts; the existing org trail was built manually rather than through Terraform</span></div><div class="item"><span class="item-icon">⚠️</span><span>Canadian Twilio instance remains a hard early-September requirement before customer onboarding, and Adam&#x2019;s PubNub access is still blocked on an expired invitation</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS cluster built out and ArgoCD running &#x2014; the earlier &#x201C;cluster not operational&#x201D; blocker is resolved</span></div><div class="item"><span class="item-icon">✅</span><span>Data plane advancing &#x2014; Russell&#x2019;s S3 PR imminent, Brandon unblocked on Looker, dynamic ARN lookups replacing hard-coded values</span></div><div class="item"><span class="item-icon">✅</span><span>Rhapsody connectivity to Canada established with a test call scheduled; custom-defaults project confirmed as a non-blocker for build-out</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>EKS and Argo CD access granted &#x2014; the long-running access ticket is closed and cluster-health validation can proceed</span></div><div class="item"><span class="item-icon">✅</span><span>Mid-August single late-stage application deploy confirmed, with the Aug 19 service handoff date intact</span></div><div class="item"><span class="item-icon">✅</span><span>Observability workstream assigned &#x2014; CloudTrail ownership spike (Tony), migration and deploy tasks (David), New Relic keys (Megan)</span></div></div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_CANADA_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">592 / 2,210 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:26.8%;background:#16a34a"></div></div><div class="budget-sub">1,618 hrs remaining &nbsp;·&nbsp; 26.8% of budget consumed &nbsp;·&nbsp; Source: PER Canadian CC Platform</div></div><!-- BUDGET_BAR_CANADA_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_CANADA_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-22</span><span class="budget-used">606 / 2,210 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:27.4%;background:#16a34a"></div></div><div class="budget-sub">1,604 hrs remaining &nbsp;·&nbsp; 27.4% of budget consumed &nbsp;·&nbsp; Source: PER Canadian CC Platform</div></div><!-- BUDGET_BAR_CANADA_END -->
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Argo CD access → validate cluster health → phased app deployments ahead of the Aug 19 platform-complete date</span>
+          <span class="milestone-text">🏁 Aug 19 platform complete — validate cluster health now that Argo access is granted, then the mid-August application deployment</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/747635813" class="source-link" target="_blank">📋 Weekly Check-In Jul 16</a><a href="https://fathom.video/calls/747635810" class="source-link" target="_blank">📋 Collab Stand-up Jul 16</a><a href="https://fathom.video/calls/746285833" class="source-link" target="_blank">📋 Collab Stand-up Jul 15</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/754005868" class="source-link" target="_blank">📋 Weekly Stand-up Jul 21</a><a href="https://fathom.video/calls/754005861" class="source-link" target="_blank">📋 Collab Stand-up Jul 21</a><a href="https://fathom.video/calls/755375523" class="source-link" target="_blank">📋 CloudTrail Breakout Jul 21</a></div>
       </div>
     </div>
 
@@ -401,28 +401,28 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🌐 &#x1F310; OC West Expansion</div>
+            <div class="card-title">🌐 &#x1F310; OC West Expansion POC</div>
             <div class="card-subtitle"><strong>Goal:</strong> Test Latency of Aurora Global for the OC West expansion.<br><strong>Timeline:</strong> June 22, 2026 - July 3, 2026.</div>
           </div>
           <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">The latency analysis is written and the go-live plan is set &#x2014; only Matt&#x2019;s sign-off on Thursday and a sub-hour execution window stand between the POC and closeout.</div>
-        <div class="exec-detail">The July 20 kickoff converted the POC into a defined go-live: Lamine will resolve the 13 failed DMS tables and flip DNS via Terraform using Miguel&#x2019;s hosted zone, an operation estimated at under an hour, contingent on client approval Jon is securing. The latency analysis doc is the final blocker for sign-off &#x2014; Jason confirmed Matt is the approver, Erika is contacting him directly to expedite, and Jon is reposting the doc plus drafting a non-technical executive summary slide for Thursday. The headline finding is favorable: the observed 400ms is inflated by an East-region bastion, and moving the application into the West region should bring latency to roughly 40ms, negligible for a healthcare workload.</div>
+        <div class="exec-quote">The latency analysis is written and favorable &#x2014; only Matt&#x2019;s sign-off on Thursday and a sub-hour execution window stand between the POC and closeout, with the production phase kicking off Monday.</div>
+        <div class="exec-detail">The Jul 20 kickoff turned the POC into a defined go-live: Lamine will resolve the 13 failed DMS tables and flip DNS through Terraform using Miguel&#x2019;s hosted zone, an operation estimated at under an hour and contingent on client approval Jon is securing. The latency analysis doc is the last item before sign-off &#x2014; Jason confirmed Matt is the approver, Erika is contacting him directly to expedite, and Jon is reposting the doc and drafting a non-technical executive summary slide for Thursday. The headline result is favorable: the observed 400ms is inflated by an East-region bastion, and in-region placement projects to roughly 40ms, negligible for a healthcare workload. The follow-on production expansion opens with a full client kickoff on Monday, including Esteban as PerfectServe&#x2019;s new Manager of Platforms.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>POC sign-off depends on Matt approving the latency analysis doc by Thursday &#x2014; Erika is expediting the review and Jon is preparing an executive summary slide</span></div><div class="item"><span class="item-icon">⚠️</span><span>13 failed DMS tables still require manual pgdump resolution, and the DNS flip needs explicit client approval before execution</span></div><div class="item"><span class="item-icon">⚠️</span><span>Next-phase timeline risk &#x2014; the client&#x2019;s 13-week SOW window may be unrealistic for the remaining technical work; Jon and Lamine are drafting a buffered estimate before Monday&#x2019;s kickoff</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>POC sign-off depends on Matt approving the latency analysis doc by Thursday Jul 23 &#x2014; Erika is expediting the review and Jon is preparing the executive summary slide</span></div><div class="item"><span class="item-icon">⚠️</span><span>13 failed DMS tables still need manual pgdump resolution inside an RDS outage window, and the DNS cutover requires explicit client approval with replication lag held under 5 seconds</span></div><div class="item"><span class="item-icon">⚠️</span><span>Next-phase timeline risk &#x2014; the client&#x2019;s ~13-week SOW window may be unrealistic for the remaining technical work; Jon and Lamine are drafting a buffered estimate before Monday&#x2019;s kickoff</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Latency analysis complete with a favorable result &#x2014; 400ms is bastion-inflated; West-region placement projects to ~40ms</span></div><div class="item"><span class="item-icon">✅</span><span>Go-live plan finalized &#x2014; 13-table fix plus Terraform DNS flip scoped at under an hour, with the full client kickoff set for Monday</span></div><div class="item"><span class="item-icon">✅</span><span>Billing moved to a formal project bucket, so Lamine&#x2019;s hours now flow into RM and the dashboard without manual reconciliation</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Latency analysis complete with a favorable result &#x2014; the 400ms figure is bastion-inflated and West-region placement projects to ~40ms</span></div><div class="item"><span class="item-icon">✅</span><span>Go-live plan finalized &#x2014; the 13-table fix plus the Terraform DNS flip is scoped at under an hour, with the full client kickoff set for Monday</span></div><div class="item"><span class="item-icon">✅</span><span>Billing moved into a formal project bucket (PER OC Multi-Region), so Lamine&#x2019;s hours now flow into RM and this dashboard without manual reconciliation</span></div></div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_OCWEST_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">26 / 118 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:22.0%;background:#16a34a"></div></div><div class="budget-sub">92 hrs remaining &nbsp;·&nbsp; 22.0% of budget consumed &nbsp;·&nbsp; Source: PER OC Multi-Region Active POC</div></div><!-- BUDGET_BAR_OCWEST_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_OCWEST_START --><!-- BUDGET_BAR_OCWEST_END -->
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Thu Jul 23 — Matts sign-off on the latency analysis, then 13-table fix → DNS flip → POC go-live</span>
+          <span class="milestone-text">🏁 Thu Jul 23 — Matts sign-off on the latency analysis, then 13-table fix → DNS flip → POC go-live; production-phase client kickoff Monday</span>
         </div>
         <div class="source-links"><a href="https://fathom.video/calls/754005855" class="source-link" target="_blank">📋 Kick Off Jul 20</a><a href="https://fathom.video/calls/747635811" class="source-link" target="_blank">📋 Stand-up Jul 16</a><a href="https://fathom.video/calls/739636434" class="source-link" target="_blank">📋 Stand-up Jul 9</a></div>
       </div>
@@ -432,37 +432,37 @@
       <div class="card-header">
         <div class="card-header-top">
           <div>
-            <div class="card-title">🛑 &#x1F510; IDP</div>
-            <div class="card-subtitle"><strong>Goal:</strong> Upgrade the IDP to Duende and vNext<br><strong>Timeline:</strong> Dec 1, 2025 - Nov 4, 2026.</div>
+            <div class="card-title">🌐 &#x1F310; OC West Expansion</div>
+            <div class="card-subtitle"><strong>Goal:</strong> Build out the OC West multi-region production expansion (post-POC)<br><strong>Timeline:</strong> July 2026 - Q4 2026 (SOW ~13 weeks).</div>
           </div>
-          <span class="rag-pill rag-red"><span class="dot"></span> Off Track</span>
+          <span class="rag-pill rag-green"><span class="dot"></span> On Track</span>
         </div>
-        <div class="exec-quote">Orrian pushed the Lightning Bolt production release to the end of the year &#x2014; past the Nov 4 project end date &#x2014; triggering the pre-agreed escalation path to Steve, Olga, and Jason.</div>
-        <div class="exec-detail">Orrian notified the team (via Slack to Tracy Canepa, July 14) that tight Q3/Q4 release and maintenance windows are pushing the Lightning Bolt production release to the end of the year &#x2014; a slip from the mid-August target that lands beyond the Nov 4 project end date; Orrian has offered to meet, and the pre-agreed escalation path to Steve, Olga, and Jason now applies. Meanwhile the upgrade project reached its July 15 release challenge on track, clearing the path to QA regression and a production release within roughly two weeks, and Brian unblocked the OCCC team&#x2019;s Phase 3 spike by configuring the upgrade environment. No newer IDP meeting data has landed, so this position is unchanged.</div>
+        <div class="exec-quote">The next phase kicked off from the Jul 20 POC go-live &#x2014; the project plan is being drafted and the full client kickoff is Monday, with no delivery-date threat yet.</div>
+        <div class="exec-detail">With the POC moving to go-live, the engagement steps into the production OC West multi-region expansion. Jon and Lamine are drafting a phased project plan to reconcile the client&#x2019;s ~13-week SOW window against a realistic, buffered technical estimate ahead of Monday&#x2019;s full client kickoff, which will include Esteban, PerfectServe&#x2019;s new Manager of Platforms. Billing has moved into a dedicated project bucket (PER OC Multi-Region) with a 1,660-hour budget, so this phase&#x2019;s hours track cleanly from the outset.</div>
       </div>
       <div class="card-body">
         <div class="card-col">
           <div class="col-label">Key Risks &amp; Blockers</div>
-          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>Orrian pushed the Lightning Bolt production release from mid-August to end of year &#x2014; beyond the Nov 4 project end date; escalation to Steve, Olga, and Jason warranted and Orrian has offered a follow-up meeting</span></div><div class="item"><span class="item-icon">⚠️</span><span>CC/OC work omitted from the Q3 PI plan &#x2014; a trade-off discussion and possible capacity reallocation are pending, with spikes defining the technical work that informs the Q3 scheduling decision</span></div><div class="item"><span class="item-icon">⚠️</span><span>Local debugging queue-connection failure is blocking development; root cause possibly tied to the Dev environment&#x2019;s AWS migration</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">⚠️</span><span>The client&#x2019;s ~13-week SOW window may be unrealistic for the remaining technical work &#x2014; Jon and Lamine are preparing a buffered estimate before Monday&#x2019;s kickoff</span></div><div class="item"><span class="item-icon">⚠️</span><span>Scope and timeline are not yet baselined &#x2014; the phased project plan and milestone baseline are still being drafted</span></div><div class="item"><span class="item-icon">⚠️</span><span>Depends on a clean POC close-out (latency sign-off Thursday and the DNS cutover) before the production expansion proceeds</span></div></div>
         </div>
         <div class="card-col">
           <div class="col-label">Recent Progress</div>
-          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Upgrade release challenge hit July 15 on track &#x2014; QA regression next, production release within ~2 weeks</span></div><div class="item"><span class="item-icon">✅</span><span>OCCC team unblocked via upgrade-environment configuration, bypassing the vNext deployment dependency</span></div><div class="item"><span class="item-icon">✅</span><span>June 17 Lightning Bolt release failure RCA completed with correction items identified; Brian Noyes deploying Identity vNext within 2&#x2013;3 weeks for introspection testing</span></div></div>
+          <div class="item-list"><div class="item"><span class="item-icon">✅</span><span>Next phase kicked off Jul 20 with a dedicated project bucket (PER OC Multi-Region, 1,660 hrs) created for accurate hours tracking</span></div><div class="item"><span class="item-icon">✅</span><span>Full client kickoff scheduled Monday with technical representation (Esteban)</span></div><div class="item"><span class="item-icon">✅</span><span>Favorable POC results (~40ms in-region) strengthen the production-expansion case</span></div></div>
         </div>
       </div>
-      <div class="card-footer"><!-- BUDGET_BAR_IDP_START --><div class="budget-bar-wrap"><div class="budget-bar-top"><span class="budget-dot" style="background:#16a34a"></span><span class="budget-label">BUDGET HOURS &nbsp;·&nbsp; ON BUDGET &nbsp;·&nbsp; SMARTSHEET 07-21</span><span class="budget-used">155 / 260 hrs used</span></div><div class="budget-track"><div class="budget-fill" style="width:59.6%;background:#16a34a"></div></div><div class="budget-sub">105 hrs remaining &nbsp;·&nbsp; 59.6% of budget consumed &nbsp;·&nbsp; Source: PER Solliance Identity Server Rollout</div></div><!-- BUDGET_BAR_IDP_END -->
+      <div class="card-footer"><!-- BUDGET_BAR_OCWEST_START --><!-- BUDGET_BAR_OCWEST_END -->
         <div class="milestone-wrap">
           <span class="milestone-badge">· Next:</span>
-          <span class="milestone-text">🏁 Meet with Orrian to re-align the LB release window; upgrade → QA regression → prod in ~2 wks</span>
+          <span class="milestone-text">🏁 Monday client kickoff — finalize the phased project plan and baseline the timeline</span>
         </div>
-        <div class="source-links"><a href="https://fathom.video/calls/737286259" class="source-link" target="_blank">📋 IDP Sync Jul 8</a><a href="https://fathom.video/calls/729864132" class="source-link" target="_blank">📋 IDP Sync Jul 1</a><a href="https://fathom.video/calls/721001569" class="source-link" target="_blank">📋 IDP Sync Jun 24</a></div>
+        <div class="source-links"><a href="https://fathom.video/calls/754005855" class="source-link" target="_blank">📋 Kick Off Jul 20</a><a href="https://fathom.video/calls/747635811" class="source-link" target="_blank">📋 Stand-up Jul 16</a></div>
       </div>
     </div>
   </div><!-- /card-grid -->
 
   <footer>
     <span>🤖 Auto-generated by Claude AI · Data sourced from Fathom meeting recordings · CherieMonte/PS-Projects</span>
-    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 21, 2026</span>
+    <span>PerfectServe Executive Dashboard · Scheduled 10:00 AM MT · July 22, 2026</span>
   </footer>
 
 </main>
